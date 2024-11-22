@@ -8,3 +8,7 @@ Lainaus-sivu sovelluksessa voisi näyttää esim. seuraavalta:
 Palautus-sivu taas voisi olla esim. seuraavan kalatainen:
 
 ![image](https://github.com/user-attachments/assets/56c9843b-fc1a-4f23-a4be-c1acd55a2486)
+
+Opiskelija- ja ajoneuvotietojen syöttämiseen ja ajopäiväkirjojen katseluun tarvitaan myös sivut ne suunnitellaan perinteisinä lomakkeina.
+
+Projektiin liittyvät tehtävät ovat tämän repositorion **Issues**-välilehdellä.
