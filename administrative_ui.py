@@ -242,6 +242,64 @@ class Ui_MainWindow(object):
         self.vehicleListLabel.setObjectName(u"vehicleListLabel")
         self.vehicleListLabel.setGeometry(QRect(10, 170, 101, 16))
         self.tabWidget.addTab(self.vehicleTab, "")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.pushButton = QPushButton(self.tab)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(300, 50, 81, 23))
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+"color: rgb(255, 255, 255);")
+        self.tableWidget_2 = QTableWidget(self.tab)
+        if (self.tableWidget_2.columnCount() < 2):
+            self.tableWidget_2.setColumnCount(2)
+        if (self.tableWidget_2.rowCount() < 10):
+            self.tableWidget_2.setRowCount(10)
+        self.tableWidget_2.setObjectName(u"tableWidget_2")
+        self.tableWidget_2.setGeometry(QRect(30, 120, 351, 192))
+        self.tableWidget_2.setFont(font1)
+        self.tableWidget_2.setRowCount(10)
+        self.tableWidget_2.setColumnCount(2)
+        self.label_3 = QLabel(self.tab)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setGeometry(QRect(30, 100, 101, 16))
+        self.widget2 = QWidget(self.tab)
+        self.widget2.setObjectName(u"widget2")
+        self.widget2.setGeometry(QRect(120, 20, 169, 56))
+        self.verticalLayout = QVBoxLayout(self.widget2)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.lineEdit = QLineEdit(self.widget2)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setFont(font1)
+
+        self.verticalLayout.addWidget(self.lineEdit)
+
+        self.lineEdit_2 = QLineEdit(self.widget2)
+        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.lineEdit_2.setFont(font1)
+
+        self.verticalLayout.addWidget(self.lineEdit_2)
+
+        self.widget3 = QWidget(self.tab)
+        self.widget3.setObjectName(u"widget3")
+        self.widget3.setGeometry(QRect(30, 20, 84, 51))
+        self.verticalLayout_2 = QVBoxLayout(self.widget3)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.widget3)
+        self.label.setObjectName(u"label")
+        self.label.setFont(font2)
+
+        self.verticalLayout_2.addWidget(self.label)
+
+        self.label_2 = QLabel(self.widget3)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setFont(font2)
+
+        self.verticalLayout_2.addWidget(self.label_2)
+
+        self.tabWidget.addTab(self.tab, "")
         self.reportsTab = QWidget()
         self.reportsTab.setObjectName(u"reportsTab")
         self.reportsTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
@@ -311,7 +369,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -338,6 +396,11 @@ class Ui_MainWindow(object):
         self.printBarcodePushButton.setText(QCoreApplication.translate("MainWindow", u"Viivakoodi", None))
         self.vehicleListLabel.setText(QCoreApplication.translate("MainWindow", u"Autoluettelo", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.vehicleTab), QCoreApplication.translate("MainWindow", u"Autot", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Tallennetut ryhm\u00e4t", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4n nimi", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Vastuuhenkil\u00f6", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Ryhm\u00e4t", None))
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))
         self.endingLabel.setText(QCoreApplication.translate("MainWindow", u"P\u00e4\u00e4ttyy", None))
