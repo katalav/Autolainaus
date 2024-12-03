@@ -2,6 +2,8 @@
 # =============================================================
 
 # KIRJASTOJEN JA MODUULIEN LATAUKSET
+# ----------------------------------
+
 from cryptography.fernet import Fernet
 
 def newKey() -> str: 
