@@ -27,7 +27,7 @@ def createChipher(key: str) -> object:
     chipher = Fernet(key)
     return chipher
 
-def encrypt(chipher: object, plainText: str) -> str:
+def encrypt(chipher: object, plainText: bytes) -> str:
     """Encrypts a message usinf Fernet algorithm
 
     Args:
@@ -57,9 +57,41 @@ def decrypt(chipher: object, cryptoText: str, byteMode: bool=False) -> str:
         plaintext = chipher.decrypt(cryptoText).decode()
     return plaintext
 
+def encryptString(plainText: str, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4=') -> str:
+    """Encrypts a block of plain text into Fernet string
+
+    Args:
+        plainText (str): The text to be encrypted
+        key (bytes, optional): A secret key. Defaults to b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4='.
+
+    Returns:
+        str: Encrypted string
+    """
+    chipherEngine = createChipher(key) # Luodaan salausmoottori
+    byteForm = plainText.encode() # Käytetään tavukoodiksi muuntoon kirjaston encode-metodia
+    cryptoText = encrypt(chipherEngine, byteForm).decode() # Muunnetaan salattu teksti merkkijonoksi decode-metodilla
+    return cryptoText
+
+def decryptString(cryptoText: str, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4=') -> str:
+    """Decrypts a Fernet encrypted string to a plain text string
+
+    Args:
+        cryptoText (str): Encrypted block of text
+        key (bytes, optional): A secret key. Defaults to b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4='.
+
+    Returns:
+        str: Plain text version of the encrypted text block
+    """
+    chipherEngine = createChipher(key)
+    plainText = decrypt(chipherEngine, cryptoText)
+    return plainText
+
 # TODO: Lisää jossain vaiheessa funktiot, jotka ottavat parametriksi vain avaimen ja tekstin
 
 if __name__ == "__main__":
-    
-    secretKey = newKey()
-    print(secretKey)
+
+    selko = 'Hippopotamus'
+    sala = encryptString(selko)
+    print('Salakirjoitettuna se on:', sala)
+    purettu = decryptString(sala)
+    print('Purettuna se on:', purettu)
