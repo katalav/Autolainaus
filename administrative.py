@@ -43,24 +43,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         try:
             # Avataam asetustiedosto ja muutetaan se Python sanakirjaksi
             with open('settings.json', 'rt') as settingsFile: # With sulkee tiedoston automaattisesti
+                
+                # TODO: Mieti kannattaako muuttaa json.load(settingsFile)-komennoksi
                 jsonData = settingsFile.read()
                 self.currentSettings = json.loads(jsonData)
-                
-            passwordUnDecoded = self.currentSettings['password']
-            #passwordDecoded = str(passwordUnDecoded, 'utf-8')
-        
-            print('Tietokannan salattu salasana dekoodaammattomana', passwordUnDecoded)
-            #print('Tietokannan salattu salasana dekoodattuna', passwordDecoded)
+
+            # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
+            # ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
             
-           
-            plainPw = cipher.decryptString(passwordUnDecoded)
-            print('Selväkielinen salasana on', plainPw)
+            # TODO: Poista print-komennot, ei tarvita enää!   
+            encryptedPassword = self.currentSettings['password']
+            print('Tietokannan salattu salasana: ', encryptedPassword)
+            
+            plainPassword = cipher.decryptString(encryptedPassword)
+            print('Selväkielinen salasana on', plainPassword)
             
             
         except Exception as e:
-            # self.openSettingsDialog()
+            
             print('tapahtui virhe: ', str(e))
-    
+            self.openSettingsDialog()
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
@@ -113,14 +115,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
 
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
-
-        # Salausavain luottamuksellisten asetusten kryptaamiseen
-        # Avainta ei saa vaihtaa ohjelman käyttöönoton jälkeen!
-        # Avain on luotu cipher.py
-        # self.secretKey = b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4='
-        # self.cryptoEngine = cipher.createChipher(self.secretKey)
         
-
         # Luetaan asetustiedosto Python-sanakirjaksi
         self.currentSettings = {}
 
