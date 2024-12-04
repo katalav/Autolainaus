@@ -33,7 +33,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="9Zi7W3lzYeUf1RVEpwSd" name="Page-2">
-    <mxGraphModel dx="934" dy="654" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1222" dy="855" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -56,25 +56,22 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-6" value="administrative_ui.py" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffcd28;strokeColor=#d79b00;gradientColor=#ffa500;" vertex="1" parent="1">
-          <mxGeometry x="400" y="413.5" width="120" height="80" as="geometry" />
+          <mxGeometry x="400" y="374" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-7" target="0hJzVkQ4XadX9CaWnRAz-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-7" value="administrative.ui&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffcd28;gradientColor=#ffa500;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="220" y="418.5" width="120" height="70" as="geometry" />
+          <mxGeometry x="220" y="379" width="120" height="70" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-8" target="0hJzVkQ4XadX9CaWnRAz-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="0hJzVkQ4XadX9CaWnRAz-8" value="cipher.py" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffcd28;strokeColor=#d79b00;gradientColor=#ffa500;" vertex="1" parent="1">
+        <mxCell id="0hJzVkQ4XadX9CaWnRAz-8" value="cipher.py" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#f8cecc;strokeColor=#b85450;gradientColor=#ea6b66;" vertex="1" parent="1">
           <mxGeometry x="400" y="250" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-9" target="0hJzVkQ4XadX9CaWnRAz-10">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="0hJzVkQ4XadX9CaWnRAz-9" value="settingsDialog.ui" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffcd28;gradientColor=#ffa500;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="220" y="575" width="120" height="70" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0.975;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-10" target="0hJzVkQ4XadX9CaWnRAz-3">
           <mxGeometry relative="1" as="geometry" />
@@ -94,27 +91,42 @@
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-24" target="0hJzVkQ4XadX9CaWnRAz-6">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="70" y="394" />
-              <mxPoint x="430" y="394" />
+              <mxPoint x="70" y="350" />
+              <mxPoint x="430" y="350" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="0hJzVkQ4XadX9CaWnRAz-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-24" target="0hJzVkQ4XadX9CaWnRAz-10">
+        <mxCell id="8iOUU9dywGJK5fzneX7z-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-24" target="0hJzVkQ4XadX9CaWnRAz-10">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="130" y="550" />
-              <mxPoint x="430" y="550" />
+              <mxPoint x="110" y="475" />
+              <mxPoint x="430" y="475" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="0hJzVkQ4XadX9CaWnRAz-24" value="PySide6" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="40" y="690" width="120" height="60" as="geometry" />
+        <mxCell id="0hJzVkQ4XadX9CaWnRAz-24" value="PySide6" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#ffcd28;gradientColor=#ffa500;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="60" y="575" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.517;entryY=0.838;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="0hJzVkQ4XadX9CaWnRAz-24" target="0hJzVkQ4XadX9CaWnRAz-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="0hJzVkQ4XadX9CaWnRAz-10" value="settingsDialog_ui.py" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffcd28;strokeColor=#d79b00;gradientColor=#ffa500;" vertex="1" parent="1">
-          <mxGeometry x="400" y="570" width="120" height="80" as="geometry" />
+          <mxGeometry x="400" y="495" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="0hJzVkQ4XadX9CaWnRAz-9" value="settingsDialog.ui" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#ffcd28;gradientColor=#ffa500;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="220" y="500" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="8iOUU9dywGJK5fzneX7z-5" value="psycopg2" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8iOUU9dywGJK5fzneX7z-6" value="dbOperations" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="260" y="672" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="8iOUU9dywGJK5fzneX7z-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.004;entryY=0.348;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="8iOUU9dywGJK5fzneX7z-5" target="8iOUU9dywGJK5fzneX7z-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8iOUU9dywGJK5fzneX7z-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.739;entryY=0.718;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="8iOUU9dywGJK5fzneX7z-6" target="0hJzVkQ4XadX9CaWnRAz-3">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
