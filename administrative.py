@@ -15,7 +15,8 @@ from PySide6 import QtWidgets # Qt-vimpaimet
 
 # Käyttöliittymämoduulien lataukset
 from administrative_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
-from settingsDialog_ui import Ui_Dialog as Settings_Dialog# Asetukset-dialogin luokka
+from settingsDialog_ui import Ui_Dialog as Settings_Dialog # Asetukset-dialogin luokka
+from passwordDialog_ui import Ui_Dialog as Password_Dialog # Salasanan muutos -dialogin luokka
 from aboutDialog_ui import Ui_Dialog as About_Dialog
 
 # Omat moduulit
@@ -48,35 +49,30 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 jsonData = settingsFile.read()
                 self.currentSettings = json.loads(jsonData)
 
+            print('Käyttäjätunnus on', self.currentSettings['userName'])
+            print('Tietokanta on', self.currentSettings['database'])
+
             # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
             # ei byte string muodossa. Fernet-salauskirjastossa avain on aina tavumuodossa.
             # Salausta varten merkkijono on muutettava aina tavumuotoon. Salattu teksti 
             # voidaan tallentaa merkkijononona ja salakirjoitus purkaa suoraan merkkijonosta!
             
             # TODO: Poista print-komennot, ei tarvita enää!   
-            encryptedPassword = self.currentSettings['password']
-            print('Tietokannan salattu salasana: ', encryptedPassword)
-            
-            plainPassword = cipher.decryptString(encryptedPassword)
-            print('Selväkielinen salasana on', plainPassword)
-            
-            
+                
         except Exception as e:
             
-            print('tapahtui virhe: ', str(e))
+            print('Asetusten lataamisessa tapahtui virhe: ', str(e))
             self.openSettingsDialog()
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
         
-        # Asetukset-valikon muokkaa toiminto avaa Asetukset-dialogi-ikkunan
+        # Asetukset-valikon Muokkaa-toiminto avaa Asetukset-dialogi-ikkunan
         self.ui.actionMuokkaa.triggered.connect(self.openSettingsDialog)
+        # Asetukset-valikon Salasana-toiminto avaa Salasana-dialogin
+        self.ui.actionVaihda_salasana.triggered.connect(self.openPasswordDialog)
         self.ui.actionTietoja_ohjelmasta.triggered.connect(self.openAboutDialog)
         
-
-        
-   
-   
     # OHJELMOIDUT SLOTIT
     # ==================
 
@@ -88,7 +84,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.saveSettingsDialog = SaveSettingsDialog() # Luodaan luokasta olio
         self.saveSettingsDialog.setWindowTitle('Palvelinasetukset')
         self.saveSettingsDialog.exec() # Luodaan dialogille oma event loop
-        
+    
+    # Salasanan vaihtodialogin avaus
+    def openPasswordDialog(self):
+        self.savePasswordDialog = SavePasswordDialog()
+        self.savePasswordDialog.setWindowTitle('Vaihda salasana')
+        self.savePasswordDialog.exec()
+
     # Tietoja ohjelmasta -dialogin avaus
     def openAboutDialog(self):
         self.aboutDialog = AboutDialog()
@@ -132,7 +134,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
             self.ui.portLineEdit.setText(self.currentSettings['port'])
             self.ui.databaseLineEdit.setText(self.currentSettings['database'])
             self.ui.userLineEdit.setText(self.currentSettings['userName'])
-            self.ui.paswordLineEdit.setText(self.currentSettings['password'])
+            
+            
+            #self.ui.paswordLineEdit.setText(self.currentSettings['password'])
         except Exception as e:
             self.openInfo()
         
@@ -154,18 +158,13 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         port = self.ui.portLineEdit.text()
         database = self.ui.databaseLineEdit.text()
         userName = self.ui.userLineEdit.text()
-        plainTextPassword = self.ui.paswordLineEdit.text()
-       
-        # Salataan ja muunnetaan tavalliseksi merkkijonoksi, jotta JSON-tiedoston luku onnistuu myöhemmin
-        encryptedPassword = cipher.encryptString(plainTextPassword)
 
         # Muodostetaan muuttujista Python-sanakirja
         settingsDictionary = {
             'server': server,
             'port': port,
             'database': database,
-            'userName': userName,
-            'password': encryptedPassword
+            'userName': userName
         }
 
         # Muunnetaan sanakirja JSON-muotoon
@@ -185,6 +184,52 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         msgBox.setText('Syötä kaikkien kenttien tiedot!')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec() # Luodaan Msg Box:lle oma event loop
+
+class SavePasswordDialog(QtWidgets.QDialog, Password_Dialog):
+    """A class to show Change Password Dialog"""
+    def __init__(self):
+        super().__init__()
+
+        self.ui = Password_Dialog()
+        self.ui.setupUi(self)
+
+        
+        # Tarkistetaan onko password.json tiedosto olemassa
+        self.chekPassword()
+
+        # SIGNAALIT
+        self.ui.savePasswordPushButton.clicked.connect(self.savePassword)
+    # SLOTIT
+
+
+    def chekPassword(self):
+        # Luetaan käyttöliittymästä tiedot paikallisiin muuttujiin
+        try:
+            with open('password.json','rt') as pwFile:
+                pwJsonData = pwFile.read()
+
+            pwData = json.loads(pwJsonData)
+            encryptedOldPassword = pwData['password']
+            print(encryptedOldPassword)
+            oldPasswordInput = self.ui.oldPasswordLineEdit.text()
+            newPasswordInput = self.ui.newPasswordLineEdit.text()
+            
+        except Exception as e:
+            print('Salasanan lataamisessa tapahtui virhe:', str(e))
+            self.ui.oldPasswordLineEdit.setEnabled(False)
+            self.ui.newPasswordLineEdit.setEnabled(True)
+            self.ui.savePasswordPushButton.setEnabled(True)
+        
+    def savePassword(self):
+        plainTextPassword = self.ui.newPasswordLineEdit.text()
+        encryptedPassword = cipher.encryptString(plainTextPassword)
+        pwDictionary = {'password': encryptedPassword}
+
+        with open('password.json','wt') as pwFile:
+                pwData = json.dumps(pwDictionary)
+                pwFile.write(pwData)
+
+            
 
 class AboutDialog(QtWidgets.QDialog, About_Dialog):
     """A class to show About dialog."""

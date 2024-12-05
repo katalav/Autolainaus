@@ -475,7 +475,7 @@ color: rgb(255, 255, 255);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="groupTab">
      <attribute name="title">
       <string>Ryhmät</string>
      </attribute>
@@ -535,7 +535,7 @@ color: rgb(255, 255, 255);</string>
       <column/>
       <column/>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="storedGroupsLabel">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -559,7 +559,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="groupNameLineEdit">
          <property name="font">
           <font>
            <pointsize>11</pointsize>
@@ -568,7 +568,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="responsiblePersonLineEdit">
          <property name="font">
           <font>
            <pointsize>11</pointsize>
@@ -589,7 +589,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="groupNameLabel">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -601,7 +601,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="responsiblePersonLabel">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -844,6 +844,7 @@ color: rgb(255, 255, 255);</string>
      <string>Asetukset</string>
     </property>
     <addaction name="actionMuokkaa"/>
+    <addaction name="actionVaihda_salasana"/>
     <addaction name="actionTietoja_ohjelmasta"/>
    </widget>
    <addaction name="menuAsetukset"/>
@@ -853,10 +854,24 @@ color: rgb(255, 255, 255);</string>
    <property name="text">
     <string>Muokkaa...</string>
    </property>
+   <property name="toolTip">
+    <string>Muokkaa ohjelman asetuksia</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+A</string>
+   </property>
   </action>
   <action name="actionTietoja_ohjelmasta">
    <property name="text">
     <string>Tietoja ohjelmasta...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+T</string>
+   </property>
+  </action>
+  <action name="actionVaihda_salasana">
+   <property name="text">
+    <string>Salasana...</string>
    </property>
   </action>
  </widget>

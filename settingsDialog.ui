@@ -7,13 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>301</width>
-    <height>197</height>
+    <height>196</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <widget class="QPushButton" name="saveSettingspushButton">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -49,7 +52,7 @@ color: rgb(255, 255, 255);</string>
      <x>110</x>
      <y>10</y>
      <width>181</width>
-     <height>146</height>
+     <height>141</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -98,21 +101,6 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Sovelluksen käyttäjätunnus&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="paswordLineEdit">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Salasana&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="echoMode">
-       <enum>QLineEdit::Password</enum>
       </property>
      </widget>
     </item>
@@ -173,18 +161,6 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Käyttäjätunnus</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="passwordLabel">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Salasana</string>
       </property>
      </widget>
     </item>

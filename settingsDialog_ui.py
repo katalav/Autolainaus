@@ -22,9 +22,10 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(301, 197)
+        Dialog.resize(301, 196)
         self.saveSettingspushButton = QPushButton(Dialog)
         self.saveSettingspushButton.setObjectName(u"saveSettingspushButton")
+        self.saveSettingspushButton.setEnabled(True)
         self.saveSettingspushButton.setGeometry(QRect(210, 160, 81, 23))
         font = QFont()
         font.setPointSize(8)
@@ -35,7 +36,7 @@ class Ui_Dialog(object):
 "color: rgb(255, 255, 255);")
         self.layoutWidget = QWidget(Dialog)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(110, 10, 181, 146))
+        self.layoutWidget.setGeometry(QRect(110, 10, 181, 141))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -64,13 +65,6 @@ class Ui_Dialog(object):
         self.userLineEdit.setFont(font1)
 
         self.verticalLayout.addWidget(self.userLineEdit)
-
-        self.paswordLineEdit = QLineEdit(self.layoutWidget)
-        self.paswordLineEdit.setObjectName(u"paswordLineEdit")
-        self.paswordLineEdit.setFont(font1)
-        self.paswordLineEdit.setEchoMode(QLineEdit.Password)
-
-        self.verticalLayout.addWidget(self.paswordLineEdit)
 
         self.layoutWidget_2 = QWidget(Dialog)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
@@ -104,12 +98,6 @@ class Ui_Dialog(object):
 
         self.verticalLayout_2.addWidget(self.userLabel)
 
-        self.passwordLabel = QLabel(self.layoutWidget_2)
-        self.passwordLabel.setObjectName(u"passwordLabel")
-        self.passwordLabel.setFont(font2)
-
-        self.verticalLayout_2.addWidget(self.passwordLabel)
-
 
         self.retranslateUi(Dialog)
 
@@ -134,13 +122,9 @@ class Ui_Dialog(object):
 #if QT_CONFIG(tooltip)
         self.userLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Sovelluksen k\u00e4ytt\u00e4j\u00e4tunnus</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(tooltip)
-        self.paswordLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Salasana</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
         self.ServerLabel.setText(QCoreApplication.translate("Dialog", u"Palvelin", None))
         self.portLabel.setText(QCoreApplication.translate("Dialog", u"Portti", None))
         self.databaseLabel.setText(QCoreApplication.translate("Dialog", u"Tietokanta", None))
         self.userLabel.setText(QCoreApplication.translate("Dialog", u"K\u00e4ytt\u00e4j\u00e4tunnus", None))
-        self.passwordLabel.setText(QCoreApplication.translate("Dialog", u"Salasana", None))
     # retranslateUi
 
