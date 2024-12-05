@@ -10,7 +10,6 @@ import sys # Käynnistysargumentit
 import json # JSON-objektien ja tiedostojen käsittely
 
 # Asennuksen vaativat kirjastot
-import dbOperations # PostgreSQL-tietokantayhteydet
 from PySide6 import QtWidgets # Qt-vimpaimet
 
 
@@ -20,7 +19,8 @@ from settingsDialog_ui import Ui_Dialog as Settings_Dialog# Asetukset-dialogin l
 from aboutDialog_ui import Ui_Dialog as About_Dialog
 
 # Omat moduulit
-import cipher
+import cipher # Salaus
+import dbOperations # PostgreSQL-tietokantayhteydet
 
 # LUOKKAMÄÄRITYKSET
 # -----------------
@@ -49,7 +49,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.currentSettings = json.loads(jsonData)
 
             # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
-            # ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
+            # ei byte string muodossa. Fernet-salauskirjastossa avain on aina tavumuodossa.
+            # Salausta varten merkkijono on muutettava aina tavumuotoon. Salattu teksti 
+            # voidaan tallentaa merkkijononona ja salakirjoitus purkaa suoraan merkkijonosta!
             
             # TODO: Poista print-komennot, ei tarvita enää!   
             encryptedPassword = self.currentSettings['password']
@@ -152,11 +154,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         port = self.ui.portLineEdit.text()
         database = self.ui.databaseLineEdit.text()
         userName = self.ui.userLineEdit.text()
-
-        # Muutetaan merkkijono tavumuotoon (byte, merkistö UTF-8)
         plainTextPassword = self.ui.paswordLineEdit.text()
        
-        # Salataan ja muunnetaan tavalliseksi merkkijonoksi, jotta JSON-tallennus onnistuu
+        # Salataan ja muunnetaan tavalliseksi merkkijonoksi, jotta JSON-tiedoston luku onnistuu myöhemmin
         encryptedPassword = cipher.encryptString(plainTextPassword)
 
         # Muodostetaan muuttujista Python-sanakirja
