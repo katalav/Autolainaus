@@ -22,7 +22,7 @@ def createChipher(key: bytes) -> object:
         key (bytes): A fernet generated key
 
     Returns:
-        object: The cipher objet to use to encrypt or decrypt
+        object: The cipher object to use to encrypt or decrypt
     """
     chipher = Fernet(key)
     return chipher
@@ -40,7 +40,7 @@ def encrypt(chipher: object, plainText: bytes) -> bytes:
     cryptoText = chipher.encrypt(plainText)
     return cryptoText
 
-def decrypt(chipher: object, cryptoText: str | bytes, byteMode: bool=False) -> str:
+def decrypt(chipher: object, cryptoText: str | bytes, byteMode: bool=False) -> str | bytes:
     """Decrypts a message
 
     Args:
@@ -49,7 +49,7 @@ def decrypt(chipher: object, cryptoText: str | bytes, byteMode: bool=False) -> s
         byteMode (bool, optional): If return value will be in byte form. Defaults to False.
 
     Returns:
-        str: message in plain text
+        str | bytes: message in plain text
     """
     if byteMode == True:
         plaintext = chipher.decrypt(cryptoText)
@@ -69,7 +69,7 @@ def encryptString(plainText: str, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknP
     """
     chipherEngine = createChipher(key) # Luodaan salausmoottori
     byteForm = plainText.encode() # Muunnetaan tavumuotoon sisäänrakennetulla encode-metodilla
-    cryptoText = encrypt(chipherEngine, byteForm).decode() # Muunnetaan salattu teksti merkkijonoksi decode-metodilla
+    cryptoText = encrypt(chipherEngine, byteForm).decode() # Salataan ja muunnetaan salattu teksti merkkijonoksi decode-metodilla
     return cryptoText
 
 def decryptString(cryptoText: str | bytes, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4=') -> str:
