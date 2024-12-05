@@ -6,20 +6,20 @@
 
 from cryptography.fernet import Fernet
 
-def newKey() -> str: 
+def newKey() -> bytes: 
     """Creates a new key for encrypting and decrypting messages
 
     Returns:
-        str: a key in byte form
+        bytes: a key in byte form
     """
     key = Fernet.generate_key()
     return key
 
-def createChipher(key: str) -> object:
+def createChipher(key: bytes) -> object:
     """Creates a new chipher ie. encrypting machine
 
     Args:
-        key (str): A fernet generated key
+        key (bytes): A fernet generated key
 
     Returns:
         object: The cipher objet to use to encrypt or decrypt
@@ -27,7 +27,7 @@ def createChipher(key: str) -> object:
     chipher = Fernet(key)
     return chipher
 
-def encrypt(chipher: object, plainText: bytes) -> str:
+def encrypt(chipher: object, plainText: bytes) -> bytes:
     """Encrypts a message usinf Fernet algorithm
 
     Args:
@@ -40,7 +40,7 @@ def encrypt(chipher: object, plainText: bytes) -> str:
     cryptoText = chipher.encrypt(plainText)
     return cryptoText
 
-def decrypt(chipher: object, cryptoText: str, byteMode: bool=False) -> str:
+def decrypt(chipher: object, cryptoText: str | bytes, byteMode: bool=False) -> str:
     """Decrypts a message
 
     Args:
@@ -68,11 +68,11 @@ def encryptString(plainText: str, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknP
         str: Encrypted string
     """
     chipherEngine = createChipher(key) # Luodaan salausmoottori
-    byteForm = plainText.encode() # Käytetään tavukoodiksi muuntoon kirjaston encode-metodia
+    byteForm = plainText.encode() # Muunnetaan tavumuotoon sisäänrakennetulla encode-metodilla
     cryptoText = encrypt(chipherEngine, byteForm).decode() # Muunnetaan salattu teksti merkkijonoksi decode-metodilla
     return cryptoText
 
-def decryptString(cryptoText: str, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4=') -> str:
+def decryptString(cryptoText: str | bytes, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBknPXI4=') -> str:
     """Decrypts a Fernet encrypted string to a plain text string
 
     Args:
