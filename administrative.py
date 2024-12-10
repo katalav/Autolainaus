@@ -51,12 +51,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
             # ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
             
-            # TODO: Poista print-komennot, ei tarvita enää!   
-            encryptedPassword = self.currentSettings['password']
-            print('Tietokannan salattu salasana: ', encryptedPassword)
-            
-            plainPassword = cipher.decryptString(encryptedPassword)
-            print('Selväkielinen salasana on', plainPassword)
             
             
         except Exception as e:
@@ -130,7 +124,8 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
             self.ui.portLineEdit.setText(self.currentSettings['port'])
             self.ui.databaseLineEdit.setText(self.currentSettings['database'])
             self.ui.userLineEdit.setText(self.currentSettings['userName'])
-            self.ui.paswordLineEdit.setText(self.currentSettings['password'])
+            plaintextPassword = cipher.decryptString(self.currentSettings['password'])
+            self.ui.paswordLineEdit.setText(plaintextPassword)
         except Exception as e:
             self.openInfo()
         
@@ -140,7 +135,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
 
         # Kun Tallenna-painiketta on klikattu, kutsutaan saveToJsonFile-metodia
         self.ui.saveSettingspushButton.clicked.connect(self.saveToJsonFile)
-    
+
+        # Suljepainikkeen toiminnot
+        self.ui.closePushButton.clicked.connect(self.closeSettingsDialog)
     # OHJELMOIDUT SLOTIT (Luokan metodit)
     # -----------------------------------
 
@@ -176,7 +173,11 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         with open('settings.json', 'wt') as settingsFile:
             settingsFile.write(jsonData)
 
-    
+        # Suljetaan dialogin ikkuna
+        self.close()
+    def closeSettingsDialog(self):
+        self.close()
+        
     # Avataan MessageBox, jossa kerrotaan että tehdää uusi asetustiedosto
     def openInfo(self):
         msgBox = QtWidgets.QMessageBox()
