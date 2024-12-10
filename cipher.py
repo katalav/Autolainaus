@@ -86,7 +86,7 @@ def decryptString(cryptoText: str, key=b'8Zra5xvI3derJNwLCue1iDdw0lbZm_T0zXFaBkn
     plainText = decrypt(chipherEngine, cryptoText)
     return plainText
 
-# TODO: Lisää jossain vaiheessa funktiot, jotka ottavat parametriksi vain avaimen ja tekstin
+
 
 if __name__ == "__main__":
 
