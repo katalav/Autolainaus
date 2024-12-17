@@ -42,10 +42,10 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.tabWidget.setFont(font)
         self.tabWidget.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.studentTab = QWidget()
-        self.studentTab.setObjectName(u"studentTab")
-        self.studentTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.registeredPersonsTableWidget = QTableWidget(self.studentTab)
+        self.lenderTab = QWidget()
+        self.lenderTab.setObjectName(u"lenderTab")
+        self.lenderTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
+        self.registeredPersonsTableWidget = QTableWidget(self.lenderTab)
         if (self.registeredPersonsTableWidget.columnCount() < 5):
             self.registeredPersonsTableWidget.setColumnCount(5)
         if (self.registeredPersonsTableWidget.rowCount() < 10):
@@ -55,19 +55,20 @@ class Ui_MainWindow(object):
         self.registeredPersonsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
         self.registeredPersonsTableWidget.setRowCount(10)
         self.registeredPersonsTableWidget.setColumnCount(5)
-        self.registeredPersonsLabel = QLabel(self.studentTab)
+        self.registeredPersonsLabel = QLabel(self.lenderTab)
         self.registeredPersonsLabel.setObjectName(u"registeredPersonsLabel")
         self.registeredPersonsLabel.setGeometry(QRect(20, 220, 131, 16))
-        self.savePersonPushButton = QPushButton(self.studentTab)
+        self.savePersonPushButton = QPushButton(self.lenderTab)
         self.savePersonPushButton.setObjectName(u"savePersonPushButton")
         self.savePersonPushButton.setGeometry(QRect(310, 180, 71, 23))
         font1 = QFont()
+        font1.setPointSize(10)
         font1.setBold(True)
         self.savePersonPushButton.setFont(font1)
         self.savePersonPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.savePersonPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
-        self.layoutWidget = QWidget(self.studentTab)
+        self.layoutWidget = QWidget(self.lenderTab)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(130, 10, 171, 191))
         self.studentInputsVerticalLayout = QVBoxLayout(self.layoutWidget)
@@ -111,7 +112,7 @@ class Ui_MainWindow(object):
 
         self.studentInputsVerticalLayout.addWidget(self.emailLineEdit)
 
-        self.layoutWidget1 = QWidget(self.studentTab)
+        self.layoutWidget1 = QWidget(self.lenderTab)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
         self.layoutWidget1.setGeometry(QRect(20, 10, 101, 191))
         self.studentLabelsVerticalLayout = QVBoxLayout(self.layoutWidget1)
@@ -152,13 +153,13 @@ class Ui_MainWindow(object):
 
         self.studentLabelsVerticalLayout.addWidget(self.emailLabel)
 
-        self.tabWidget.addTab(self.studentTab, "")
+        self.tabWidget.addTab(self.lenderTab, "")
         self.vehicleTab = QWidget()
         self.vehicleTab.setObjectName(u"vehicleTab")
         self.vehicleTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.layoutWidget2 = QWidget(self.vehicleTab)
         self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(10, 0, 101, 141))
+        self.layoutWidget2.setGeometry(QRect(10, 0, 101, 151))
         self.vehicleLabelsVerticalLayout = QVBoxLayout(self.layoutWidget2)
         self.vehicleLabelsVerticalLayout.setObjectName(u"vehicleLabelsVerticalLayout")
         self.vehicleLabelsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -256,15 +257,15 @@ class Ui_MainWindow(object):
         self.vehicleListLabel.setObjectName(u"vehicleListLabel")
         self.vehicleListLabel.setGeometry(QRect(10, 170, 101, 16))
         self.tabWidget.addTab(self.vehicleTab, "")
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        self.saveGroupPushButton = QPushButton(self.tab)
+        self.groupsTab = QWidget()
+        self.groupsTab.setObjectName(u"groupsTab")
+        self.saveGroupPushButton = QPushButton(self.groupsTab)
         self.saveGroupPushButton.setObjectName(u"saveGroupPushButton")
         self.saveGroupPushButton.setGeometry(QRect(300, 60, 81, 23))
         self.saveGroupPushButton.setFont(font1)
         self.saveGroupPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
-        self.savedGroupsTableWidget = QTableWidget(self.tab)
+        self.savedGroupsTableWidget = QTableWidget(self.groupsTab)
         if (self.savedGroupsTableWidget.columnCount() < 2):
             self.savedGroupsTableWidget.setColumnCount(2)
         if (self.savedGroupsTableWidget.rowCount() < 10):
@@ -274,10 +275,10 @@ class Ui_MainWindow(object):
         self.savedGroupsTableWidget.setFont(font2)
         self.savedGroupsTableWidget.setRowCount(10)
         self.savedGroupsTableWidget.setColumnCount(2)
-        self.savedGroupsLabel = QLabel(self.tab)
+        self.savedGroupsLabel = QLabel(self.groupsTab)
         self.savedGroupsLabel.setObjectName(u"savedGroupsLabel")
         self.savedGroupsLabel.setGeometry(QRect(30, 100, 101, 16))
-        self.layoutWidget3 = QWidget(self.tab)
+        self.layoutWidget3 = QWidget(self.groupsTab)
         self.layoutWidget3.setObjectName(u"layoutWidget3")
         self.layoutWidget3.setGeometry(QRect(120, 20, 169, 60))
         self.verticalLayout = QVBoxLayout(self.layoutWidget3)
@@ -295,7 +296,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.responsiblePLineEdit)
 
-        self.layoutWidget4 = QWidget(self.tab)
+        self.layoutWidget4 = QWidget(self.groupsTab)
         self.layoutWidget4.setObjectName(u"layoutWidget4")
         self.layoutWidget4.setGeometry(QRect(30, 20, 84, 51))
         self.verticalLayout_2 = QVBoxLayout(self.layoutWidget4)
@@ -313,7 +314,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.responsiblePLabel_2)
 
-        self.tabWidget.addTab(self.tab, "")
+        self.tabWidget.addTab(self.groupsTab, "")
         self.reportsTab = QWidget()
         self.reportsTab.setObjectName(u"reportsTab")
         self.reportsTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
@@ -383,7 +384,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -395,13 +396,14 @@ class Ui_MainWindow(object):
         self.actionTietoja_ohjelmasta.setText(QCoreApplication.translate("MainWindow", u"Tietoja ohjelmasta...", None))
         self.registeredPersonsLabel.setText(QCoreApplication.translate("MainWindow", u"Rekister\u00f6idyt lainaajat", None))
         self.savePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
+        self.groupComboBox.setCurrentText("")
         self.ssnLabel.setText(QCoreApplication.translate("MainWindow", u"Henkil\u00f6tunnus", None))
         self.firstNameLabel.setText(QCoreApplication.translate("MainWindow", u"Etunimi", None))
         self.lastNameLabel.setText(QCoreApplication.translate("MainWindow", u"Sukunimi", None))
         self.groupLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4", None))
         self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajokorttiluokka", None))
         self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.studentTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.lenderTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
         self.numberPlateLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.manufacturerLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki", None))
         self.modelLabel.setText(QCoreApplication.translate("MainWindow", u"Malli", None))
@@ -415,7 +417,7 @@ class Ui_MainWindow(object):
         self.savedGroupsLabel.setText(QCoreApplication.translate("MainWindow", u"Tallennetut ryhm\u00e4t", None))
         self.groupNameLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4n nimi", None))
         self.responsiblePLabel_2.setText(QCoreApplication.translate("MainWindow", u"Vastuuhenkil\u00f6", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Ryhm\u00e4t", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.groupsTab), QCoreApplication.translate("MainWindow", u"Ryhm\u00e4t", None))
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))
         self.endingLabel.setText(QCoreApplication.translate("MainWindow", u"P\u00e4\u00e4ttyy", None))
