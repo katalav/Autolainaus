@@ -46,15 +46,15 @@ class Ui_MainWindow(object):
         self.lenderTab.setObjectName(u"lenderTab")
         self.lenderTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.registeredPersonsTableWidget = QTableWidget(self.lenderTab)
-        if (self.registeredPersonsTableWidget.columnCount() < 5):
-            self.registeredPersonsTableWidget.setColumnCount(5)
+        if (self.registeredPersonsTableWidget.columnCount() < 6):
+            self.registeredPersonsTableWidget.setColumnCount(6)
         if (self.registeredPersonsTableWidget.rowCount() < 10):
             self.registeredPersonsTableWidget.setRowCount(10)
         self.registeredPersonsTableWidget.setObjectName(u"registeredPersonsTableWidget")
-        self.registeredPersonsTableWidget.setGeometry(QRect(20, 240, 601, 241))
+        self.registeredPersonsTableWidget.setGeometry(QRect(20, 240, 641, 241))
         self.registeredPersonsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
         self.registeredPersonsTableWidget.setRowCount(10)
-        self.registeredPersonsTableWidget.setColumnCount(5)
+        self.registeredPersonsTableWidget.setColumnCount(6)
         self.registeredPersonsLabel = QLabel(self.lenderTab)
         self.registeredPersonsLabel.setObjectName(u"registeredPersonsLabel")
         self.registeredPersonsLabel.setGeometry(QRect(20, 220, 131, 16))
@@ -384,7 +384,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

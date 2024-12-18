@@ -7,11 +7,7 @@
 # Ladattavat kirjastot
 import psycopg2
 
-# Sisäiset kirjastot
-import json
 
-# Omat moduulit
-import cipher
 
 
 # LUOKAT

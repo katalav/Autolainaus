@@ -35,7 +35,7 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
@@ -49,7 +49,7 @@
        <rect>
         <x>20</x>
         <y>240</y>
-        <width>601</width>
+        <width>641</width>
         <height>241</height>
        </rect>
       </property>
@@ -60,7 +60,7 @@
        <number>10</number>
       </property>
       <property name="columnCount">
-       <number>5</number>
+       <number>6</number>
       </property>
       <row/>
       <row/>
@@ -72,6 +72,7 @@
       <row/>
       <row/>
       <row/>
+      <column/>
       <column/>
       <column/>
       <column/>
