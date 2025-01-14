@@ -14,7 +14,7 @@ import psycopg2
 # ------
 
 class DbConnection():
-    """A class to crate PostgreSQL Database connections and various data operations"""
+    """A class to create PostgreSQL Database connections and various data operations"""
     
     # Konstruktori
     def __init__(self, settings: dict):
