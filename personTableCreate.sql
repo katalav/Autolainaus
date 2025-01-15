@@ -7,4 +7,3 @@ CREATE TABLE person
 
 );  
 
---sä et sitä testausBUP.sql juttua muuten si tallentanu. et nyt kärsit jos luet tätä myöhemmin ja etit sitä (:::::::
