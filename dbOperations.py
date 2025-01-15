@@ -7,9 +7,6 @@
 # Ladattavat kirjastot
 import psycopg2
 
-
-
-
 # LUOKAT
 # ------
 
@@ -208,6 +205,14 @@ if __name__ == "__main__":
     print('Vastuuhenkilöitä ovat:', recordSet3)
 
     
-    
+if __name__ == '__main':    
 
-    
+    settingsDictionary = {'server': 'localhost', 
+                      'port': '5432',
+                      'database': 'testaus',
+                      'userName': 'postgres',
+                      'password': 'Q2werty' }
+
+    dbConnection = DbConnection(settingsDictionary)
+
+    print(dbConnection.connectionString)
