@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>850</width>
+    <height>638</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>26</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(42, 138, 149);
+
+
+
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="kirjauduulosPushButton">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>480</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(238, 44, 130);
+alternate-background-color: rgb(238, 44, 130);</string>
+    </property>
+    <property name="text">
+     <string>Kirjaudu Ulos</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="valikkoframe">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>130</y>
+      <width>401</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 98, 117);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLabel" name="valikkoLabel">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>22</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Valikko</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="lainausPushButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>90</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(238, 44, 130);</string>
+     </property>
+     <property name="text">
+      <string>Lainaus</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="palautusPushButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>170</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(238, 44, 130);</string>
+     </property>
+     <property name="text">
+      <string>Palautus</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="ylaFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>971</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 33, 72);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLabel" name="heiOppilaslabel">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>411</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Hei (oppilaan nimi tähän)</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="studentandkeyLabol">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>180</y>
+      <width>271</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>studentAndKey.png</pixmap>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>850</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>24</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 24pt &quot;Segoe UI&quot;;
+border-top-color: rgb(2, 3, 109);
+</string>
+   </property>
+   <widget class="QMenu" name="menuK_ytt_ehdot">
+    <property name="geometry">
+     <rect>
+      <x>535</x>
+      <y>156</y>
+      <width>255</width>
+      <height>98</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>24</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(2, 3, 109);
+alternate-background-color: rgb(2, 3, 109);</string>
+    </property>
+    <property name="title">
+     <string>Käyttöehdot</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuKirjaudu">
+    <property name="title">
+     <string>Valikko</string>
+    </property>
+    <addaction name="actionRekister_idy"/>
+    <addaction name="actionMy_h_stymis_selvitys"/>
+    <addaction name="actionOhje"/>
+   </widget>
+   <widget class="QMenu" name="menuKirjaudu_ulos">
+    <property name="title">
+     <string>Käyttäjä</string>
+    </property>
+    <addaction name="actionKirjaudu_ulos"/>
+    <addaction name="actionKirjaudu_sis_n"/>
+   </widget>
+   <addaction name="menuKirjaudu"/>
+   <addaction name="menuKirjaudu_ulos"/>
+   <addaction name="menuK_ytt_ehdot"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionRekister_ityminen">
+   <property name="text">
+    <string>Kirjautuminen</string>
+   </property>
+  </action>
+  <action name="actionLainaus">
+   <property name="text">
+    <string>Lainaus</string>
+   </property>
+  </action>
+  <action name="actionK_ytt_ehdot">
+   <property name="text">
+    <string>Käyttöehdot</string>
+   </property>
+  </action>
+  <action name="actionRekister_idy">
+   <property name="text">
+    <string>Lainaus</string>
+   </property>
+  </action>
+  <action name="actionKirjaudu_sis_n">
+   <property name="text">
+    <string>Asetukset</string>
+   </property>
+  </action>
+  <action name="actionMy_h_stymis_selvitys">
+   <property name="text">
+    <string>Palautus</string>
+   </property>
+  </action>
+  <action name="actionOhje">
+   <property name="text">
+    <string>Ohje </string>
+   </property>
+  </action>
+  <action name="actionKirjaudu_ulos">
+   <property name="text">
+    <string>Kirjaudu ulos</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>kirjauduulosPushButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="testpictures.qrc"/>
+ </resources>
+ <connections/>
+</ui>

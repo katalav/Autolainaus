@@ -89,5 +89,5 @@ ALTER TABLE ONLY public.person
     ADD CONSTRAINT person_pkey PRIMARY KEY (idnumero);
 -- Completed on 2025-01-15 11:03:31
 --
--- PostgreSQL database dump complete
+-- PostgreSQL database dump complete 
 --
