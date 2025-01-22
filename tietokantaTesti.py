@@ -47,23 +47,48 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                       'database': 'testaus',
                       'userName': 'postgres',
                       'password': 'Q2werty' }
-
+        
+        #Piilotetaan kuvat ja syöttökentät sovelluksen käynnis?jatkui?
+        self.ui.teacherPictureLabel.hide()
+        self.ui.keyPictureabel.hide()
+        # täs oli jotain vielä
+        self.ui.studentPictureLabel()
+        
     # OHJELMOIDUT SLOTIT
     # ------------------
     
         # Tallennetaan syötetyt tietokantaan
-
     def saveData(self): 
         dbconnection = dbOperations.DbConnection(self.settingsDictionary)
         data = {'etunimi': self.ui.firstNameLineEdit.text(), 
                 'sukunimi': self.ui.lastNameLineEdit.text()}
         dbconnection.addToTable('person', data)
-        self.openWarning()
+        
+        #määritellään tilarivin tekstit,näyttöaika 3sek.
+        
+        message = f'Henkilön {self.ui.firstNameLineEdit.text()} {self.ui.lastNameLineEdit.text()} tiedot tallennettiin'
+        self.ui.statusbar.showMessage(message, 3000)
+        
+        #Tyhennetään kentät? wut is this
         self.ui.firstNameLineEdit.clear()
         self.ui.lastNameLineEdit.clear()
         
+    def takeCar(self):
+    
+            # Tuodaan lainauksen kuvat ja syöttökentät näkyviin
+        self.ui.teacherPictureLabel.show()
+        self.ui.keyPictureLabel.show()
+        self.ui.ssnLineEdit.show()
+        self.ui.returnCarPushButton.hide() # Piilotetaan Palauta-painike
         
+        
+        # Näytetään tilarivillä Ohjeteksti
+        message = 'Lue ajokortin viivakoodi ensin ja sen jälkeen avaimen viivakoodi'
+        self.ui.statusbar.showMessage(message)
 
+    def showKeyLineEdit(self):
+        self.ui.keyBarcodeLineEdit.show()
+        self.ui.keyBarcodeLineEdit.setFocus()
 
     # Avataan MessageBox
     def openWarning(self):

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>845</width>
-    <height>748</height>
+    <width>844</width>
+    <height>661</height>
    </rect>
   </property>
   <property name="font">
@@ -22,46 +22,24 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(51, 167, 181);
+   <string notr="true">background-color: rgb(42, 138, 149);
 
 
 
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="kirjaudusisnBushButton">
+   <widget class="QFrame" name="lueavainframe">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>520</y>
-      <width>191</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(238, 44, 130);
-alternate-background-color: rgb(238, 44, 130);</string>
-    </property>
-    <property name="text">
-     <string>Kirjaudu sisään</string>
-    </property>
-   </widget>
-   <widget class="QFrame" name="frame">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>170</y>
-      <width>401</width>
+      <x>50</x>
+      <y>150</y>
+      <width>551</width>
       <height>441</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 98, 117);</string>
+     <string notr="true">background-color: rgb(51, 167, 181);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -69,141 +47,100 @@ alternate-background-color: rgb(238, 44, 130);</string>
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QLabel" name="etunimiLabel">
+    <widget class="QLabel" name="lueViivakoodiLabol">
      <property name="geometry">
       <rect>
        <x>30</x>
        <y>30</y>
-       <width>121</width>
+       <width>321</width>
        <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <pointsize>22</pointsize>
-       <bold>true</bold>
       </font>
      </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
      <property name="text">
-      <string>Etunimi :</string>
+      <string>Lue ajokortti</string>
      </property>
     </widget>
-    <widget class="QLabel" name="sukunimiLabel">
+    <widget class="QFrame" name="viivakoodiFrame">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>150</y>
-       <width>151</width>
-       <height>41</height>
+       <y>90</y>
+       <width>301</width>
+       <height>80</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>22</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">background-color: rgb(26, 84, 91);</string>
      </property>
-     <property name="text">
-      <string>Sukunimi :</string>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
      </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QLabel" name="esimerkkilabel">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>20</y>
+        <width>141</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ajokortin tarkistus näkymä tähän</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QLabel" name="oppilastunnusLabel">
+    <widget class="QPushButton" name="lainaaPushButton">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>260</y>
-       <width>211</width>
+       <x>310</x>
+       <y>250</y>
+       <width>141</width>
        <height>51</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>22</pointsize>
-       <bold>true</bold>
+       <pointsize>24</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">background-color: rgb(238, 44, 130);</string>
      </property>
      <property name="text">
-      <string>Oppilastunnus :</string>
+      <string>Jatka</string>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="oppilastunnusPlainTextEdit">
+    <widget class="QLabel" name="okTaiErrorLabel">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>330</y>
-       <width>271</width>
-       <height>64</height>
+       <x>200</x>
+       <y>190</y>
+       <width>101</width>
+       <height>41</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>22</pointsize>
-      </font>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);
-alternate-background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+      <string notr="true">background-color: rgb(0, 98, 117);</string>
      </property>
-    </widget>
-    <widget class="QTextEdit" name="sukunimiLextEdit">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>200</y>
-       <width>271</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>22</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(2, 2, 2);
-alternate-background-color: rgb(255, 255, 255);
-background-color: rgb(255, 255, 255);</string>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="etunimiTextEdit">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>80</y>
-       <width>271</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>22</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+     <property name="text">
+      <string>   OK TAI ERROR</string>
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="ylaFrame">
+   <widget class="QFrame" name="ylaframe">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>841</width>
+      <width>971</width>
       <height>80</height>
      </rect>
     </property>
@@ -216,41 +153,24 @@ color: rgb(0, 0, 0);</string>
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QLabel" name="kirjauduLabel">
+    <widget class="QLabel" name="LainausLabel">
      <property name="geometry">
       <rect>
        <x>30</x>
        <y>20</y>
-       <width>281</width>
+       <width>411</width>
        <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <pointsize>24</pointsize>
-       <bold>true</bold>
       </font>
      </property>
      <property name="text">
-      <string>Kirjaudu</string>
+      <string>Lainaus</string>
      </property>
     </widget>
-   </widget>
-   <widget class="QLabel" name="studentAndKyeLabel">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>250</y>
-      <width>271</width>
-      <height>231</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>studentAndKey.png</pixmap>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -258,7 +178,7 @@ color: rgb(0, 0, 0);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>845</width>
+     <width>844</width>
      <height>33</height>
     </rect>
    </property>
@@ -278,8 +198,8 @@ border-top-color: rgb(2, 3, 109);
    <widget class="QMenu" name="menuK_ytt_ehdot">
     <property name="geometry">
      <rect>
-      <x>474</x>
-      <y>182</y>
+      <x>535</x>
+      <y>156</y>
       <width>255</width>
       <height>98</height>
      </rect>
@@ -302,13 +222,22 @@ alternate-background-color: rgb(2, 3, 109);</string>
    </widget>
    <widget class="QMenu" name="menuKirjaudu">
     <property name="title">
-     <string>Kirjaudu</string>
+     <string>Valikko</string>
     </property>
-    <addaction name="actionKirjaudu_sis_n"/>
     <addaction name="actionRekister_idy"/>
+    <addaction name="actionMy_h_stymis_selvitys"/>
+    <addaction name="actionOhje"/>
    </widget>
-   <addaction name="menuK_ytt_ehdot"/>
+   <widget class="QMenu" name="menuKirjaudu_ulos">
+    <property name="title">
+     <string>Käyttäjä</string>
+    </property>
+    <addaction name="actionKirjaudu_ulos"/>
+    <addaction name="actionKirjaudu_sis_n"/>
+   </widget>
    <addaction name="menuKirjaudu"/>
+   <addaction name="menuKirjaudu_ulos"/>
+   <addaction name="menuK_ytt_ehdot"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionRekister_ityminen">
@@ -328,20 +257,30 @@ alternate-background-color: rgb(2, 3, 109);</string>
   </action>
   <action name="actionRekister_idy">
    <property name="text">
-    <string>Rekisteröidy</string>
+    <string>Lainaus</string>
    </property>
   </action>
   <action name="actionKirjaudu_sis_n">
    <property name="text">
-    <string>Kirjaudu sisään</string>
+    <string>Asetukset</string>
+   </property>
+  </action>
+  <action name="actionMy_h_stymis_selvitys">
+   <property name="text">
+    <string>Palautus</string>
+   </property>
+  </action>
+  <action name="actionOhje">
+   <property name="text">
+    <string>Ohje </string>
+   </property>
+  </action>
+  <action name="actionKirjaudu_ulos">
+   <property name="text">
+    <string>Kirjaudu ulos</string>
    </property>
   </action>
  </widget>
- <tabstops>
-  <tabstop>sukunimiLextEdit</tabstop>
-  <tabstop>oppilastunnusPlainTextEdit</tabstop>
-  <tabstop>kirjaudusisnBushButton</tabstop>
- </tabstops>
  <resources>
   <include location="testpictures.qrc"/>
  </resources>
