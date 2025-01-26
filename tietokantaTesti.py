@@ -1,12 +1,3 @@
-# ESIMERKKI TIEDOSTOKANTATESTEIHIN SOVELTUVASTA
-# KÄYTTÖLIITTYMÄSTÄ QT-YMPÄRISTÖSSÄ
-#==================================
-
-
-# KIRJASTOJEN JA MODUULIEN LATAUS
-#---------------------------------
-
-import tietokantaTesti_ui
 # PYSIDE6-MALLINE SOVELLUKSEN PÄÄIKKUNAN LUOMISEEN
 # KÄÄNNETYSTÄ KÄYTTÖLIITTYMÄTIEDOSTOSTA (mainWindow_ui.py)
 # =====================================================
@@ -16,7 +7,7 @@ import tietokantaTesti_ui
 import os # Polkumääritykset
 import sys # Käynnistysargumentit
 
-import dbOperations 
+import dbOperations
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 from tietokantaTesti_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
@@ -37,51 +28,60 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
+        
+        # Kun tallennuspainiketta on klikattu, kutsutaan -metodia
+        # self.ui.savePushButton.clicked.connect(self.saveData)
 
-        
-        # Kun Tulosta-painiketta on klikattu, kutsutaan updatePrintedLabel-metodia
-        self.ui.savePushButton.clicked.connect(self.saveData)
-        
-        self.settingsDictionary = {'server': 'localhost', 
-                      'port': '5432',
+        # Kun Lainaa-painiketta on painettu, kutsutaan takeCar-metodia
+        self.ui.takeCarPushButton.clicked.connect(self.takeCar)
+
+        # Kun Henkilötunnus-kentästä poistutaan enterillä, 
+        # tuodaan näkyviin Rekisterinumero-kenttä
+
+        self.ui.ssnLineEdit.returnPressed.connect(self.showKeyLineEdit)
+
+        self.settingsDictionary = {'server': 'localhost',
+                      'port': '5433',
                       'database': 'testaus',
                       'userName': 'postgres',
-                      'password': 'Q2werty' }
+                      'password': 'Q2werty'}
         
-        #Piilotetaan kuvat ja syöttökentät sovelluksen käynnis?jatkui?
-        self.ui.teacherPictureLabel.hide()
-        self.ui.keyPictureabel.hide()
-        # täs oli jotain vielä
-        self.ui.studentPictureLabel()
-        
+        # Piilotetaan kuvat ja syöttökentät sovelluksen käynnistyksessä
+        self.ui.PictureLabel.hide()
+        self.ui.keyPictureLabel.hide()
+        self.ui.ssnLineEdit.hide()
+        self.ui.keyBarcodeLineEdit.hide()
+        self.ui.dateLabel.hide()
+        self.ui.hourLCDNumber.hide()
+        self.ui.minuteLCDNumber.hide()
+
+
     # OHJELMOIDUT SLOTIT
     # ------------------
-    
-        # Tallennetaan syötetyt tietokantaan
-    def saveData(self): 
+
+    # Tallennetaan syötety tiedot tietokantaan
+    def saveData(self):
         dbconnection = dbOperations.DbConnection(self.settingsDictionary)
-        data = {'etunimi': self.ui.firstNameLineEdit.text(), 
+        data = {'etunimi': self.ui.lastNameLineEdit.text(),
                 'sukunimi': self.ui.lastNameLineEdit.text()}
         dbconnection.addToTable('person', data)
-        
-        #määritellään tilarivin tekstit,näyttöaika 3sek.
-        
+
+        # Määritellään tilarivin teksti, näyttöaika 3 sek.
         message = f'Henkilön {self.ui.firstNameLineEdit.text()} {self.ui.lastNameLineEdit.text()} tiedot tallennettiin'
         self.ui.statusbar.showMessage(message, 3000)
-        
-        #Tyhennetään kentät? wut is this
+
+        # Tyhjennetään kentät
         self.ui.firstNameLineEdit.clear()
         self.ui.lastNameLineEdit.clear()
         
     def takeCar(self):
-    
-            # Tuodaan lainauksen kuvat ja syöttökentät näkyviin
+
+        # Tuodaan lainauksen kuvat ja syöttökentät näkyviin
         self.ui.teacherPictureLabel.show()
         self.ui.keyPictureLabel.show()
         self.ui.ssnLineEdit.show()
         self.ui.returnCarPushButton.hide() # Piilotetaan Palauta-painike
-        
-        
+
         # Näytetään tilarivillä Ohjeteksti
         message = 'Lue ajokortin viivakoodi ensin ja sen jälkeen avaimen viivakoodi'
         self.ui.statusbar.showMessage(message)
@@ -94,8 +94,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def openWarning(self):
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Information)
-        msgBox.setWindowTitle('Tiedot tallennettu!')
-        msgBox.setText(f'Henkilön {self.ui.lastNameLineEdit.text()}: tiedot menivät tietokantaan')
+        msgBox.setWindowTitle('Tiedot tallennettu')
+        msgBox.setText(f'Henkilön {self.ui.lastNameLineEdit.text()} tiedot meinivät tietokantaan')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 

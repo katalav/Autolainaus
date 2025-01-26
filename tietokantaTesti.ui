@@ -29,136 +29,112 @@
    <number>-3000</number>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(139, 62, 83);</string>
+   <string notr="true">
+background-color: rgb(51, 167, 181);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="firstNameLineEdit">
+   <widget class="QLabel" name="studentAndKeyLabel">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>240</y>
+      <width>231</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/png/studentAndKey.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="namesFrame">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 252, 254);
-background-color: rgb(247, 237, 255);</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="firstNameiLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Etunimi:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lastNameLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>60</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(248, 238, 255);
-background-color: rgb(235, 235, 255);
-</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lastNameLabel">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>30</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Sukunimi:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="savePushButton">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>110</y>
-      <width>75</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Tallenna</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="studentPictureLabel">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>120</y>
-      <width>191</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>student.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="keyPictureabel">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>160</y>
-      <width>131</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>key.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="teacherPictureLabel">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>280</y>
-      <width>171</width>
+      <y>20</y>
+      <width>541</width>
       <height>171</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 98, 117);</string>
     </property>
-    <property name="pixmap">
-     <pixmap>teacher.png</pixmap>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
     </property>
-    <property name="scaledContents">
-     <bool>true</bool>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
     </property>
+    <widget class="QLineEdit" name="firstNameLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(247, 237, 255);</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lastNameLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>60</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(235, 235, 255);
+</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lastNameLabel">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>30</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Sukunimi:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="savePushButton">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>130</y>
+       <width>75</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(238, 44, 130);</string>
+     </property>
+     <property name="text">
+      <string>Tallenna</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="etunimiLabel">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>40</y>
+       <width>49</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Etunimi:</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -212,22 +188,5 @@ background-color: rgb(65, 67, 158);</string>
  <resources>
   <include location="testpictures.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>firstNameLineEdit</sender>
-   <signal>textEdited(QString)</signal>
-   <receiver>firstNameiLabel</receiver>
-   <slot>setText(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>100</x>
-     <y>108</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>55</x>
-     <y>70</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
