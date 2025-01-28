@@ -41,7 +41,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.ssnLineEdit.returnPressed.connect(self.showKeyLineEdit)
 
         self.settingsDictionary = {'server': 'localhost',
-                      'port': '5433',
+                      'port': '5432',
                       'database': 'testaus',
                       'userName': 'postgres',
                       'password': 'Q2werty'}

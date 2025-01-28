@@ -36,8 +36,8 @@ background-color: rgb(51, 167, 181);</string>
    <widget class="QLabel" name="studentAndKeyLabel">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>240</y>
+      <x>30</x>
+      <y>-20</y>
       <width>231</width>
       <height>241</height>
      </rect>
@@ -50,7 +50,7 @@ background-color: rgb(51, 167, 181);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
+      <y>190</y>
       <width>541</width>
       <height>171</height>
      </rect>
@@ -64,35 +64,6 @@ background-color: rgb(51, 167, 181);</string>
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QLineEdit" name="firstNameLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>60</y>
-       <width>181</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(247, 237, 255);</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lastNameLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>60</y>
-       <width>181</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(235, 235, 255);
-</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="lastNameLabel">
      <property name="geometry">
       <rect>
@@ -135,6 +106,35 @@ background-color: rgb(235, 235, 255);
       <string>Etunimi:</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QLineEdit" name="lastNameLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>260</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(235, 235, 255);
+</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="firstNameLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>260</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(247, 237, 255);</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
