@@ -37,9 +37,9 @@ background-color: rgb(51, 167, 181);</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>330</y>
+      <y>300</y>
       <width>681</width>
-      <height>381</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -137,8 +137,8 @@ color: rgb(7, 7, 7);</string>
     <widget class="QPushButton" name="valmisPushButton">
      <property name="geometry">
       <rect>
-       <x>220</x>
-       <y>270</y>
+       <x>100</x>
+       <y>240</y>
        <width>211</width>
        <height>61</height>
       </rect>
@@ -152,25 +152,42 @@ font: 24pt &quot;Segoe UI&quot;;</string>
       <string>Valmis</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="takeCarPushButton">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>240</y>
+       <width>211</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(238, 44, 130);
+font: 24pt &quot;Segoe UI&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Ota Auto</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="studentAndKeyLabel">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>-10</y>
+      <x>330</x>
+      <y>-40</y>
       <width>231</width>
       <height>241</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/png/studentAndKey.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/png/uiPictures/studentAndKey.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="lainausJaPalautusLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>260</y>
+      <x>270</x>
+      <y>240</y>
       <width>381</width>
       <height>41</height>
      </rect>

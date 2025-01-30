@@ -1,7 +1,8 @@
 <RCC>
   <qresource prefix="png">
-    <file>key.png</file>
-    <file>student.png</file>
-    <file>studentAndKey.png</file>
+    <file>uiPictures/key.png</file>
+    <file>uiPictures/student.png</file>
+    <file>uiPictures/studentAndKey.png</file>
+    <file>uiPictures/teacher.png</file>
   </qresource>
 </RCC>
