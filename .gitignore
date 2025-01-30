@@ -166,3 +166,5 @@ cython_debug/
 settings.json
 settings.json
 settings.json
+settings.json
+.vscode/settings.json
