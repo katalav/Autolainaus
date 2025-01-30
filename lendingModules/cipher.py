@@ -1,3 +1,8 @@
+"""A module to encrypt and decrypt text based data using symmetric encryption algorithm Fernet.
+
+
+    """
+
 # MODUULI SALAUAVAINTEN JA FERNET-SALAUKSEEN JA SEN PURKAMISEEN
 # =============================================================
 

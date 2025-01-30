@@ -1,3 +1,6 @@
+"""A module to product Code 128 barecodes. There are simple functions whitch produce Code128B barcodes. There is also a class to create and check validity of Code128 barcode variants
+
+    """
 # MODUULI VIIVAKOODIEN TUOTTAMISEEN
 # =================================
 

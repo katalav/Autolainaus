@@ -2,7 +2,7 @@
 # ============================
 
 import pytest # virheilmoituksen testaus vaatii 
-import dbOperations # varsinainen testattava moduuli
+from lendingModules import dbOperations # varsinainen testattava moduuli
 
 settingsDictionary = {'server': 'localhost', 
                       'port': '5432',
