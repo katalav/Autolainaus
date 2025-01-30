@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>739</width>
-    <height>600</height>
+    <width>832</width>
+    <height>696</height>
    </rect>
   </property>
   <property name="font">
@@ -33,26 +33,13 @@
 background-color: rgb(51, 167, 181);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="studentAndKeyLabel">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>-20</y>
-      <width>231</width>
-      <height>241</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/png/studentAndKey.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QFrame" name="namesFrame">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>190</y>
-      <width>541</width>
-      <height>171</height>
+      <x>110</x>
+      <y>330</y>
+      <width>681</width>
+      <height>381</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -64,24 +51,78 @@ background-color: rgb(51, 167, 181);</string>
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QLabel" name="lastNameLabel">
+    <widget class="QLabel" name="lueAvaimmetLabel">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>30</y>
-       <width>101</width>
-       <height>21</height>
+       <x>380</x>
+       <y>60</y>
+       <width>221</width>
+       <height>61</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 24pt &quot;Segoe UI&quot;;
+background-color: rgb(0, 33, 72);</string>
+     </property>
      <property name="text">
-      <string>Sukunimi:</string>
+      <string>LUE AVAIMMET</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lueAjokorttiiLabel">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>60</y>
+       <width>231</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt; font-weight:700;&quot;&gt;LUE AJOKORTTI&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 24pt &quot;Segoe UI&quot;;
+background-color: rgb(0, 33, 72);</string>
+     </property>
+     <property name="text">
+      <string>LUE AJOKORTTI</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lueAjokorttiLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>140</y>
+       <width>231</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 24pt &quot;Segoe UI&quot;;
+color: rgb(3, 3, 3);
+background-color: rgb(255, 255, 255);</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lueAvaimmetLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>140</y>
+       <width>231</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+font: 24pt &quot;Segoe UI&quot;;
+color: rgb(7, 7, 7);</string>
      </property>
     </widget>
     <widget class="QPushButton" name="savePushButton">
      <property name="geometry">
       <rect>
-       <x>410</x>
-       <y>130</y>
+       <x>570</x>
+       <y>490</y>
        <width>75</width>
        <height>24</height>
       </rect>
@@ -93,47 +134,53 @@ background-color: rgb(51, 167, 181);</string>
       <string>Tallenna</string>
      </property>
     </widget>
-    <widget class="QLabel" name="etunimiLabel">
+    <widget class="QPushButton" name="valmisPushButton">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>40</y>
-       <width>49</width>
-       <height>16</height>
+       <x>220</x>
+       <y>270</y>
+       <width>211</width>
+       <height>61</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(238, 44, 130);
+color: rgb(255, 255, 255);
+font: 24pt &quot;Segoe UI&quot;;</string>
+     </property>
      <property name="text">
-      <string>Etunimi:</string>
+      <string>Valmis</string>
      </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="lastNameLineEdit">
+   <widget class="QLabel" name="studentAndKeyLabel">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>260</y>
-      <width>181</width>
-      <height>31</height>
+      <x>350</x>
+      <y>-10</y>
+      <width>231</width>
+      <height>241</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(235, 235, 255);
-</string>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/png/studentAndKey.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="firstNameLineEdit">
+   <widget class="QLabel" name="lainausJaPalautusLabel">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>260</x>
       <y>260</y>
-      <width>181</width>
-      <height>31</height>
+      <width>381</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(247, 237, 255);</string>
+     <string notr="true">color: rgb(0, 33, 72);
+font: 26pt &quot;Segoe UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>LAINAUS JA PALAUTUS</string>
     </property>
    </widget>
   </widget>
@@ -142,7 +189,7 @@ background-color: rgb(247, 237, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>739</width>
+     <width>832</width>
      <height>33</height>
     </rect>
    </property>
@@ -188,5 +235,38 @@ background-color: rgb(65, 67, 158);</string>
  <resources>
   <include location="testpictures.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lueAjokorttiiLabel</sender>
+   <signal>linkActivated(QString)</signal>
+   <receiver>lueAjokorttiLineEdit</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lueAvaimmetLabel</sender>
+   <signal>linkActivated(QString)</signal>
+   <receiver>lueAvaimmetLineEdit</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>579</x>
+     <y>314</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>588</x>
+     <y>379</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

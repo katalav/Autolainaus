@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="png">
-    <file>studentAndKey.png</file>
     <file>key.png</file>
     <file>student.png</file>
+    <file>studentAndKey.png</file>
   </qresource>
 </RCC>

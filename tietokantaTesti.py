@@ -47,13 +47,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                       'password': 'Q2werty'}
         
         # Piilotetaan kuvat ja syöttökentät sovelluksen käynnistyksessä
-        self.ui.PictureLabel.hide()
-        self.ui.keyPictureLabel.hide()
-        self.ui.ssnLineEdit.hide()
-        self.ui.keyBarcodeLineEdit.hide()
-        self.ui.dateLabel.hide()
-        self.ui.hourLCDNumber.hide()
-        self.ui.minuteLCDNumber.hide()
+        self.ui.lueAvaimmetLabel.hide()
+        self.ui.lueAvaimmetLineEdit.hide()
+        self.ui.lueAjokorttiLineEdit.hide()
+        self.ui.lueAjokorttiiLabel.hide()
+        self.ui.studentAndKeyLabel.hide()
+        self.ui.valmisPushButton.hide()
+        self.ui.namesFrame.hide()
 
 
     # OHJELMOIDUT SLOTIT
@@ -67,29 +67,29 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbconnection.addToTable('person', data)
 
         # Määritellään tilarivin teksti, näyttöaika 3 sek.
-        message = f'Henkilön {self.ui.firstNameLineEdit.text()} {self.ui.lastNameLineEdit.text()} tiedot tallennettiin'
+        message = f'Henkilön {self.ui.lueAjokorttiLineEdit.text()} {self.ui.lueAjokorttiLineEdit.text()} tiedot tallennettiin'
         self.ui.statusbar.showMessage(message, 3000)
 
         # Tyhjennetään kentät
-        self.ui.firstNameLineEdit.clear()
-        self.ui.lastNameLineEdit.clear()
+        self.ui.lueAvaimmetLineEdit.clear()
+        self.ui.lueAjokorttiiLabel.clear()
         
     def takeCar(self):
 
         # Tuodaan lainauksen kuvat ja syöttökentät näkyviin
-        self.ui.teacherPictureLabel.show()
-        self.ui.keyPictureLabel.show()
-        self.ui.ssnLineEdit.show()
-        self.ui.returnCarPushButton.hide() # Piilotetaan Palauta-painike
+        self.ui.studentAndKeyLabel.show()
+        self.ui.valmisPushButton.show()
+        self.ui.lainausJaPalautusLabel.show()
+        self.ui.valmisPushButton.hide() # Piilotetaan Palauta-painike
 
         # Näytetään tilarivillä Ohjeteksti
-        message = 'Lue ajokortin viivakoodi ensin ja sen jälkeen avaimen viivakoodi'
+        message = 'Lue ajokortin viivakoodi'
         self.ui.statusbar.showMessage(message)
 
     def showKeyLineEdit(self):
         self.ui.keyBarcodeLineEdit.show()
         self.ui.keyBarcodeLineEdit.setFocus()
-
+        message = 'Ota ajokortti pois lukijasta ja laita avaimenperä lukijaan'
     # Avataan MessageBox
     def openWarning(self):
         msgBox = QtWidgets.QMessageBox()
