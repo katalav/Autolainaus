@@ -29,8 +29,8 @@ def test_readOneRow():
 
 # TODO: Testataan tietueen / rivin (record / row) lisäys tauluun (table)
 
-def test_addRow(arg):
-    dbConnection.addToTable('person',newVolues)
+def test_addRow():
+    dbConnection.addToTable('person', newVolues)
     resultList = dbConnection.readAllColumnsFromTable('person')
     rowCount = len(resultList)
     assert resultList[rowCount] == (rowCount, 'Herkko', 'Hyväusko')
