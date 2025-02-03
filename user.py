@@ -28,6 +28,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.setupUi(self)
         
         # Ohjelman käynnistyksessä piilotetaan tarpeettomat elementit
+        self.setInitialElements()
+
+
+
+
+        # OHJELMOIDUT SIGNAALIT
+        # ---------------------
+
+
+        # Kun lainaa painiketta kutsutaan activateLender-metodia
+        self.ui.takeCarPushButton.clicked.connect(self.activateLender)
+
+        #Kun ajokortin viivakoodia painetaan, kutsutaan activateKey-metodia
+        self.ui.readIdLineEdit.returnPressed.connect(self.activateKey)
+        
+        #Kun avaimmenperä on luettu, kutsutaan set lendingData
+        self.ui.keyBarcodeLineEdit.returnPressed.connect(self.setLendingData)
+   
+    # OHJELMOIDUT SLOTIT
+    # ------------------
+    
+        #Palauta käyttöliittymä alkutilanteeseen
+    def setInitialElements(self):
+        self.ui.namesFrame.show()
+        self.ui.teacherLabel.show()
+        self.ui.statusbar.show()
+        self.ui.returnCarPushButton.show()
+        self.ui.takeCarPushButton.show()
         self.ui.goBackPushButton.hide()
         self.ui.readIdLineEdit.hide()
         self.ui.keyBarcodeLineEdit.hide()
@@ -39,25 +67,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.savePushButton.hide()
         self.ui.namesFrame.hide()
         self.ui.timeLabel.hide()
-        self.ui.valmisPushButton.hide()
         self.ui.soundOnPushButton.hide()
         self.ui.StudentsNameStatusLabel.hide()
         self.ui.carsInfoStatusLabel.hide()
-
-
-
-
-        # OHJELMOIDUT SIGNAALIT
-        # ---------------------
         
-        # Kun lainaa painiketta kutsutaan activateLender-metodia
-        self.ui.takeCarPushButton.clicked.connect(self.activateLender)
-
-        #Kun ajokortin viivakoodia painetaan, kutsutaan activateKey-metodia
-        self.ui.readIdLineEdit.returnPressed.connect(self.activateKey)
-   
-    # OHJELMOIDUT SLOTIT
-    # ------------------
+        
     # Näyttää "lue ajokortti" labolin ja henkilötunnuksen syöttö kentän
     def activateLender(self):
         self.ui.namesFrame.show()
@@ -70,7 +84,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
         self.ui.statusLabel.show()
-        self.ui.valmisPushButton.hide()
+        self.ui.savePushButton.hide()
         
     #Näyttää "syätä avain" labolin ja avaimmen syöttö kentän
     def activateKey(self):
@@ -78,13 +92,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeLabel.show()
         self.ui.keyBarcodeLineEdit.setFocus()
         self.ui.StudentsNameStatusLabel.show()
-        self.ui.valmisPushButton.show()
+        self.ui.savePushButton.show()
 
 
-
-    
-
-        #Kun Lue ajokortti on täytetty siirretään lue avain kohtaan
+        #näyttää lainauksen tiedot näytölle
+    def setLendingData(self):
+        self.ui.carsInfoStatusLabel.show()
+        self.ui.dateLabel.show()
+        self.ui.clockLabel.show()
+        self.ui.savePushButton.show()
     
 
 
