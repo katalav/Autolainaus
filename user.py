@@ -28,19 +28,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.setupUi(self)
         
         # Ohjelman käynnistyksessä piilotetaan tarpeettomat elementit
-        self.ui.PalaaTakaisinPushButton.hide()
-        self.ui.LueAjokorttiLineEdit.hide()
-        self.ui.LueAvainLineEdit.hide()
+        self.ui.goBackPushButton.hide()
+        self.ui.readIdLineEdit.hide()
+        self.ui.keyBarcodeLineEdit.hide()
         self.ui.calendarLabel.hide()
         self.ui.clockLabel.hide()
         self.ui.dateLabel.hide()
-        self.ui.lueAjokorttiLabel.hide()
-        self.ui.lueAvainLabel.hide()
+        self.ui.readIdLabel.hide()
+        self.ui.keyBarcodeLabel.hide()
         self.ui.savePushButton.hide()
         self.ui.namesFrame.hide()
         self.ui.timeLabel.hide()
         self.ui.valmisPushButton.hide()
         self.ui.soundOnPushButton.hide()
+        self.ui.StudentsNameStatusLabel.hide()
+        self.ui.carsInfoStatusLabel.hide()
 
 
 
@@ -48,46 +50,43 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
         
-        # Kun Tulosta-painiketta on klikattu, kutsutaan updatePrintedLabel-metodia
+        # Kun lainaa painiketta kutsutaan activateLender-metodia
         self.ui.takeCarPushButton.clicked.connect(self.activateLender)
-        self.ui.valmisPushButton.clicked.connect(self.activateLender)
 
-
-        
-        # self.ui.tulostaPushButton.clicked.connect(self.updatePrintedLabel)
-
-        
-   
+        #Kun ajokortin viivakoodia painetaan, kutsutaan activateKey-metodia
+        self.ui.readIdLineEdit.returnPressed.connect(self.activateKey)
    
     # OHJELMOIDUT SLOTIT
     # ------------------
-    #auton lainaus
+    # Näyttää "lue ajokortti" labolin ja henkilötunnuksen syöttö kentän
     def activateLender(self):
         self.ui.namesFrame.show()
         self.ui.statusLabel.setText('Auton Lainaus')
-        self.ui.PalaaTakaisinPushButton.show()
-        self.ui.lueAjokorttiLabel.show()
-        self.ui.LueAjokorttiLineEdit.show()
-        self.ui.LueAvainLineEdit.show()
-        self.ui.lueAvainLabel.show()
+        self.ui.goBackPushButton.show()
+        self.ui.readIdLineEdit.show()
+        self.ui.readIdLabel.show()
+        self.ui.keyBarcodeLineEdit.hide()
+        self.ui.keyBarcodeLabel.hide()
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
         self.ui.statusLabel.show()
-        self.ui.valmisPushButton.show()
+        self.ui.valmisPushButton.hide()
         
-    #auton palautus
+    #Näyttää "syätä avain" labolin ja avaimmen syöttö kentän
+    def activateKey(self):
+        self.ui.keyBarcodeLineEdit.show()
+        self.ui.keyBarcodeLabel.show()
+        self.ui.keyBarcodeLineEdit.setFocus()
+        self.ui.StudentsNameStatusLabel.show()
+        self.ui.valmisPushButton.show()
+
 
 
     
 
         #Kun Lue ajokortti on täytetty siirretään lue avain kohtaan
     
-    
-    
-    # Muutetaan tulostettuLabel:n sisältö: teksti ja väri
-    def updatePrintedLabel(self):
-        self.ui.tulostettuLabel.setText('Tulostettu')
-        self.ui.tulostettuLabel.setStyleSheet(u"color: rgb(0, 255, 0);")
+
 
     # Avataan MessageBox
     def openWarning(self):
