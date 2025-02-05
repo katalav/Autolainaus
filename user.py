@@ -45,7 +45,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         #Kun avaimmenperä on luettu, kutsutaan set lendingData
         self.ui.keyBarcodeLineEdit.returnPressed.connect(self.setLendingData)
-   
+
+        # kun ok painiketta on painettu, tallenna tiedot ja palauta käyttöliittymä alkutilaan
+        self.ui.savePushButton.clicked.connect(self.saveLendingData)
+        
+        
     # OHJELMOIDUT SLOTIT
     # ------------------
     
@@ -70,6 +74,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.soundOnPushButton.hide()
         self.ui.StudentsNameStatusLabel.hide()
         self.ui.carsInfoStatusLabel.hide()
+        self.ui.keyBarcodeReturnLineEdit.hide()
         
         
     # Näyttää "lue ajokortti" labolin ja henkilötunnuksen syöttö kentän
@@ -102,7 +107,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.clockLabel.show()
         self.ui.savePushButton.show()
     
-
+    # Tallenna lainauksen tiedot ja palauta käyttöliittymä alkutilaan
+    def saveLendingData(self):
+        #safe data to thr database
+        self.setInitialElements()
+        self.ui.statusbar.showMessage('auton lainauksen tiedot tallennettiin', 5000)
 
     # Avataan MessageBox
     def openWarning(self):
