@@ -9,6 +9,8 @@ import sys # Käynnistysargumentit
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 
+from lendingModules import sound #äänitoiminnot
+
 # mainWindow_ui:n tilalle käännetyn pääikkunan tiedoston nimi
 # ilman .py-tiedostopäätettä
 from user_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
@@ -115,7 +117,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeLabel.show()
         self.ui.keyBarcodeLineEdit.setFocus()
         self.ui.StudentsNameStatusLabel.show()
-        self.ui.savePushButton.show()
+        self.ui.savePushButton.hide()
     
 
 
@@ -131,10 +133,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     
     # Tallenna lainauksen tiedot ja palauta käyttöliittymä alkutilaan
     def saveLendingData(self):
-        #safe data to thr database
+        #safe data to the database
         self.setInitialElements()
         self.ui.statusbar.showMessage('auton lainauksen tiedot tallennettiin', 5000)
-        
+        sound.playWav()
     # painettu lainaa-painiketta, kutsutaan activateReturnCar 
     
     def activateReturnCar(self):

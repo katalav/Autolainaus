@@ -138,52 +138,6 @@ background-color: rgb(0, 33, 72);</string>
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="carsInfoStatusLabel">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>310</y>
-       <width>281</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 28pt &quot;Segoe UI&quot;;
-color: rgb(0, 33, 72);</string>
-     </property>
-     <property name="text">
-      <string>cars info</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="StudentsNameStatusLabel">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>310</y>
-       <width>281</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 28pt &quot;Segoe UI&quot;;
-color: rgb(0, 33, 72);</string>
-     </property>
-     <property name="text">
-      <string>students info</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="keyBarcodeReturnLineEdit">
      <property name="geometry">
       <rect>
@@ -208,7 +162,7 @@ color: rgb(0, 0, 0);</string>
        <x>0</x>
        <y>80</y>
        <width>681</width>
-       <height>241</height>
+       <height>301</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -303,6 +257,52 @@ color: rgb(0, 33, 72);</string>
       </property>
       <property name="text">
        <string>Lainaus info</string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="StudentsNameStatusLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>281</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 28pt &quot;Segoe UI&quot;;
+color: rgb(0, 33, 72);</string>
+      </property>
+      <property name="text">
+       <string>students info</string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="carsInfoStatusLabel">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>110</y>
+        <width>281</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 28pt &quot;Segoe UI&quot;;
+color: rgb(0, 33, 72);</string>
+      </property>
+      <property name="text">
+       <string>cars info</string>
       </property>
       <property name="scaledContents">
        <bool>false</bool>
