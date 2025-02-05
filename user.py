@@ -49,6 +49,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # kun ok painiketta on painettu, tallenna tiedot ja palauta käyttöliittymä alkutilaan
         self.ui.savePushButton.clicked.connect(self.saveLendingData)
         
+        #kun palauta painiketta painetaan kutsutaan activateLender-metodia
+        self.ui.returnCarPushButton.clicked.connect(self.activateReturnCar)
+        
+        #kun tallenna painiketta on painettu
+        self.ui.savePushButton.clicked.connect(self.saveReturnCarData)
+        
+        # Kun mykistä painiketta painetaan, kutsutaan mute-metodia
+        self.ui.soundOffPushButton.clicked.connect(self.mute)
+
+        # Kun äänipäiniketta painetaan, kutsutaan unmute-metodia
+        self.ui.soundOnPushButton.clicked.connect(self.unmute)
+
+        # Kun kumoa painiketta painetaan palautetaan UI-alkutilaan
+        self.ui.goBackPushButton.clicked.connect(self.goBack)
+  
         
     # OHJELMOIDUT SLOTIT
     # ------------------
@@ -62,7 +77,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.takeCarPushButton.show()
         self.ui.goBackPushButton.hide()
         self.ui.readIdLineEdit.hide()
+        self.ui.readIdLineEdit.clear()
         self.ui.keyBarcodeLineEdit.hide()
+        self.ui.keyBarcodeLineEdit.clear()
         self.ui.calendarLabel.hide()
         self.ui.clockLabel.hide()
         self.ui.dateLabel.hide()
@@ -75,9 +92,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.StudentsNameStatusLabel.hide()
         self.ui.carsInfoStatusLabel.hide()
         self.ui.keyBarcodeReturnLineEdit.hide()
+        self.ui.keyBarcodeReturnLineEdit.clear()
+        self.ui.lainausInfoframe.hide()
         
-        
-    # Näyttää "lue ajokortti" labolin ja henkilötunnuksen syöttö kentän
+    # Näyttää "lue ajokortti" labolin ja syöttö kentän
     def activateLender(self):
         self.ui.namesFrame.show()
         self.ui.statusLabel.setText('Auton Lainaus')
@@ -98,20 +116,66 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeLineEdit.setFocus()
         self.ui.StudentsNameStatusLabel.show()
         self.ui.savePushButton.show()
+    
 
 
         #näyttää lainauksen tiedot näytölle
     def setLendingData(self):
         self.ui.carsInfoStatusLabel.show()
         self.ui.dateLabel.show()
+        self.ui.calendarLabel.show()
         self.ui.clockLabel.show()
+        self.ui.timeLabel.show()
         self.ui.savePushButton.show()
+        self.ui.lainausInfoframe.show()
     
     # Tallenna lainauksen tiedot ja palauta käyttöliittymä alkutilaan
     def saveLendingData(self):
         #safe data to thr database
         self.setInitialElements()
         self.ui.statusbar.showMessage('auton lainauksen tiedot tallennettiin', 5000)
+        
+    # painettu lainaa-painiketta, kutsutaan activateReturnCar 
+    
+    def activateReturnCar(self):
+        self.ui.goBackPushButton.show()
+        self.ui.namesFrame.show()
+        self.ui.statusLabel.setText('Auton palautus')
+        self.ui.goBackPushButton.show()
+        self.ui.readIdLineEdit.hide()
+        self.ui.readIdLabel.hide()
+        self.ui.keyBarcodeReturnLineEdit.show()
+        self.ui.keyBarcodeLineEdit.hide()
+        self.ui.keyBarcodeLabel.show()
+        self.ui.returnCarPushButton.hide()
+        self.ui.takeCarPushButton.hide()
+        self.ui.statusLabel.show()
+        self.ui.savePushButton.show()
+        self.ui.returnDayLabel.hide()
+        self.ui.keyBarcodeReturnLineEdit.setFocus()
+        
+    # Tallennetaan palautuksen tiedot tietokantaan ja palautetaan UI alkutilaan
+    def saveReturnCarData(self):
+        self.ui.statusbar.showMessage('auto palautettu')
+        self.setInitialElements()
+            
+    # Mykistetään äänet
+    def mute(self):
+        self.ui.soundOffPushButton.hide()
+        self.ui.soundOnPushButton.show()
+        self.ui.statusbar.showMessage('Äänet mykistetty')
+        self.soundOn = False
+    
+    # Poistetaan mykistys
+    def unmute(self):
+        self.ui.soundOffPushButton.show()
+        self.ui.soundOnPushButton.hide()
+        self.ui.statusbar.showMessage('Äänet käytössä')
+        self.soundOn = True
+    
+    def goBack(self):
+        self.setInitialElements()
+        self.ui.statusbar.showMessage('Toiminto peruutettiin', 5000)
 
     # Avataan MessageBox
     def openWarning(self):
@@ -130,5 +194,5 @@ app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
 window.show()
 
-# Käynnistetään sovellus ja tapahtumienkäsittelijä
+# Käynnistetään sovellus ja tapahtumienkäsittelijä (event loop)
 app.exec()
