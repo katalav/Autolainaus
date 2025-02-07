@@ -6,11 +6,14 @@
 # ----------------------------------
 import os # Polkumääritykset
 import sys # Käynnistysargumentit
+import json # JSON-tiedostojen käsittely
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 
 from lendingModules import sound #äänitoiminnot
-
+from lendingModules import dbOperations # Tietokantatoiminnot
+from lendingModules import cipher # Salausmoduuli
+ 
 # mainWindow_ui:n tilalle käännetyn pääikkunan tiedoston nimi
 # ilman .py-tiedostopäätettä
 from user_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
@@ -28,6 +31,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
+        
+        # Kutsutaan käyttöliittymän muodostusmetodia setupUi
+        self.ui.setupUi(self)
+
+        # Rutiini, joka lukee asetukset, jos ne ovat olemassa
+        try:
+            # Avataam asetustiedosto ja muutetaan se Python sanakirjaksi
+            with open('settings.json', 'rt') as settingsFile: # With sulkee tiedoston automaattisesti
+                
+                jsonData = settingsFile.read()
+                self.currentSettings = json.loads(jsonData)
+         # Puretaan salasana tietokantaoperaatioita varten  
+            self.plainTextPassword = cipher.decryptString(self.currentSettings['password'])
+        except Exception as error:
+            self.openWarning()
+            
         
         # Ohjelman käynnistyksessä piilotetaan tarpeettomat elementit
         self.setInitialElements()
@@ -131,12 +150,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.savePushButton.show()
         self.ui.lainausInfoframe.show()
     
-    # Tallenna lainauksen tiedot ja palauta käyttöliittymä alkutilaan
+    # Tallennetaan lainauksen tiedot ja palautetaan käyttöliittymä alkutilaan
     def saveLendingData(self):
-        #safe data to the database
+        # Save data to the database
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+        ssn = self.ui.readIdLabel.text()
+        key = self.ui.keyBarcodeLineEdit.text()
+        dataDictionary = {'hetu': ssn,
+                          'rekisterinumero': key}
+        dbConnection.addToTable('lainaus', dataDictionary)
+
         self.setInitialElements()
-        self.ui.statusbar.showMessage('auton lainauksen tiedot tallennettiin', 5000)
-        sound.playWav()
+        self.ui.statusbar.showMessage('Auton lainaustiedot tallennettiin', 5000)
+        if self.soundOn:
+            sound.playWav('sounds\\lendingOk.WAV')
+            
     # painettu lainaa-painiketta, kutsutaan activateReturnCar 
     
     def activateReturnCar(self):
@@ -183,8 +217,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def openWarning(self):
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-        msgBox.setWindowTitle('Hirveetä!')
-        msgBox.setText('Jotain kamalaa tapahtui')
+        msgBox.setWindowTitle('Tietokantayhteyttä ei voitu muodostaa!')
+        msgBox.setText('Otayhteyttä järjestelmän valvojaan')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 

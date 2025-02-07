@@ -1,9 +1,1 @@
-{
-    "python.testing.pytestArgs": [
-        "."
-
-    ],
-    "python.testing.unittesEnabled": false,
-    "python.testing.pytestEnabled": true
-    
-}
+{"server": "localhost", "port": "5432", "database": "testaus", "userName": "postgres", "password": "gAAAAABnpj7NImxPl4xtdAlDSNdpASh9j3bPRkDUV5NFtuBNByW9i56MoyVqXPu8LGvqudDv9u63rmqQc5jeG3kkrKVbRBIqcg=="}
