@@ -119,28 +119,39 @@ font: 20pt &quot;Segoe UI&quot;;</string>
      <rect>
       <x>263</x>
       <y>220</y>
-      <width>215</width>
-      <height>56</height>
+      <width>298</width>
+      <height>58</height>
      </rect>
     </property>
-    <layout class="QFormLayout" name="formLayout">
+    <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="lastnameLineEdit"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="lastFocusPushButton">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="firstNameLineEdit"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButton_3">
        <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLineEdit" name="lineEdit_2"/>
-     </item>
-     <item row="1" column="1">
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>PushButton</string>
+        <string>LastFocus</string>
        </property>
       </widget>
      </item>
