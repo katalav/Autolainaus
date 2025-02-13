@@ -212,7 +212,7 @@ if __name__ == '__main':
 
     settingsDictionary = {'server': 'localhost', 
                       'port': '5432',
-                      'database': 'testaus',
+                      'database': 'autolainaus',
                       'userName': 'postgres',
                       'password': 'Q2werty' }
 

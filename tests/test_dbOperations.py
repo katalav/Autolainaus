@@ -6,7 +6,7 @@ from lendingModules import dbOperations # varsinainen testattava moduuli
 
 settingsDictionary = {'server': 'localhost', 
                       'port': '5432',
-                      'database': 'testaus',
+                      'database': 'autolainaus',
                       'userName': 'postgres',
                       'password': 'Q2werty' }
 

@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(801, 203)
+        MainWindow.resize(801, 730)
         font = QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -178,6 +178,12 @@ class Ui_MainWindow(object):
         icon3.addFile(u":/png/uiPictures/goBackArrow.drawio", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.goBackPushButton.setIcon(icon3)
         self.goBackPushButton.setIconSize(QSize(24, 24))
+        self.startFrame = QFrame(self.centralwidget)
+        self.startFrame.setObjectName(u"startFrame")
+        self.startFrame.setGeometry(QRect(10, 160, 781, 511))
+        self.startFrame.setStyleSheet(u"background-color: rgb(0, 33, 72);")
+        self.startFrame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.startFrame.setFrameShadow(QFrame.Shadow.Raised)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")

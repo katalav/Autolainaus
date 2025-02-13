@@ -89,8 +89,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # OHJELMOIDUT SLOTIT
     # ------------------
     
+    #soita parametrina annettu äänitiedosto
+    
+    
         #Palauta käyttöliittymä alkutilanteeseen
     def setInitialElements(self):
+        self.ui.startFrame.show()
         self.ui.namesFrame.show()
         self.ui.teacherLabel.show()
         self.ui.statusbar.show()
@@ -124,11 +128,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.readIdLineEdit.show()
         self.ui.readIdLabel.show()
         self.ui.keyBarcodeLineEdit.hide()
+        self.ui.startFrame.hide()
         self.ui.keyBarcodeLabel.hide()
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
         self.ui.statusLabel.show()
         self.ui.savePushButton.hide()
+        self.ui.startFrame.hide()
         
     #Näyttää "syätä avain" labolin ja avaimmen syöttö kentän
     def activateKey(self):
@@ -150,7 +156,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.savePushButton.show()
         self.ui.lainausInfoframe.show()
     
-    # Tallennetaan lainauksen tiedot ja palautetaan käyttöliittymä alkutilaan
+       # Tallennetaan lainauksen tiedot ja palautetaan käyttöliittymä alkutilaan
     def saveLendingData(self):
         # Save data to the database
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -158,23 +164,29 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
 
-        # Luodaan tietokantayhteys-olio
-        dbConnection = dbOperations.DbConnection(dbSettings)
-        ssn = self.ui.readIdLabel.text()
-        key = self.ui.keyBarcodeLineEdit.text()
-        dataDictionary = {'hetu': ssn,
-                          'rekisterinumero': key}
-        dbConnection.addToTable('lainaus', dataDictionary)
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            ssn = self.ui.readIdLineEdit.text()
+            key = self.ui.keyBarcodeLineEdit.text()
+            dataDictionary = {'hetu': ssn,
+                            'rekisterinumero': key}
+            dbConnection.addToTable('lainaus', dataDictionary)
 
-        self.setInitialElements()
-        self.ui.statusbar.showMessage('Auton lainaustiedot tallennettiin', 5000)
-        if self.soundOn:
-            sound.playWav('sounds\\lendingOk.WAV')
+            self.setInitialElements()
+            self.ui.statusbar.showMessage('Auton lainaustiedot tallennettiin', 5000)
+            if self.soundOn:
+                sound.playWav('sounds\\lendingOk.WAV')   
+        except Exception as e:
+            title = 'Lainaustietojen tallentaminen ei onnistu'
+            text = 'Ajokorttin tai auton tiedot virheelliset, ota yhteys henkilökuntaan!'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
             
     # painettu lainaa-painiketta, kutsutaan activateReturnCar 
-    
     def activateReturnCar(self):
         self.ui.goBackPushButton.show()
+        self.ui.startFrame.hide()
         self.ui.namesFrame.show()
         self.ui.statusLabel.setText('Auton palautus')
         self.ui.goBackPushButton.show()

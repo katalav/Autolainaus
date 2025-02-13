@@ -1,9 +1,11 @@
+-- Luo autolainaustietokannan taulut ja laskurit
 
 CREATE TABLE auto (
                 rekisterinumero VARCHAR(7) NOT NULL,
                 merkki VARCHAR(30) NOT NULL,
                 malli VARCHAR(20) NOT NULL,
                 vuosimalli CHAR(4) NOT NULL,
+                henkilomaara INT
                 CONSTRAINT auto_pk PRIMARY KEY (rekisterinumero)
 );
 COMMENT ON TABLE auto IS 'Ajoneuvon perustiedot';
@@ -15,8 +17,8 @@ CREATE TABLE ryhma (
                 CONSTRAINT ryhma_pk PRIMARY KEY (ryhma)
 );
 COMMENT ON TABLE ryhma IS 'Opiskelijan luokka';
-COMMENT ON COLUMN ryhma.ryhma IS 'Ryhm�n nimi, esim. auto22B tai henkil�kunta';
-COMMENT ON COLUMN ryhma.vastuuhenkilo IS 'Vastuuopettaja tai l�hiesimies';
+COMMENT ON COLUMN ryhma.ryhma IS 'Ryhmän nimi, esim. auto22B tai henkilökunta';
+COMMENT ON COLUMN ryhma.vastuuhenkilo IS 'Vastuuopettaja tai lähiesimies';
 
 
 CREATE TABLE lainaaja (
@@ -30,8 +32,8 @@ CREATE TABLE lainaaja (
 );
 COMMENT ON TABLE lainaaja IS 'Lainaajan (opiskelija tai ope) perustiedot';
 COMMENT ON COLUMN lainaaja.hetu IS 'Kansallinen henkiltunnus';
-COMMENT ON COLUMN lainaaja.sahkoposti IS 'Rasekon s�hk�postiosoite';
-COMMENT ON COLUMN lainaaja.ryhma IS 'Ryhm�n nimi, esim. auto22B tai henkil�kunta';
+COMMENT ON COLUMN lainaaja.sahkoposti IS 'Rasekon sähköpostiosoite';
+COMMENT ON COLUMN lainaaja.ryhma IS 'Ryhmän nimi, esim. auto22B tai henkilökunta';
 COMMENT ON COLUMN lainaaja.ajokorttiluokka IS 'Esim AB tai ABCE';
 
 
@@ -48,8 +50,8 @@ CREATE TABLE lainaus (
 COMMENT ON TABLE lainaus IS 'Lainaustapahtuman tiedot';
 COMMENT ON COLUMN lainaus.lainausnumero IS 'Lainaustapahtumalle automaattisesti annettava juokseva numero';
 COMMENT ON COLUMN lainaus.hetu IS 'Kansallinen henkiltunnus';
-COMMENT ON COLUMN lainaus.lainausaika IS 'P�iv�m��ra ja kellonaika, kun auto on otettu lainaan';
-COMMENT ON COLUMN lainaus.palautus IS 'Palautuksen p�iv� ja kellonaika';
+COMMENT ON COLUMN lainaus.lainausaika IS 'Päivämäära ja kellonaika, kun auto on otettu lainaan';
+COMMENT ON COLUMN lainaus.palautus IS 'Palautuksen päivä ja kellonaika';
 
 
 ALTER SEQUENCE lainaus_lainausnumero_seq OWNED BY lainaus.lainausnumero;

@@ -19,7 +19,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(117, 51, 65);</string>
+   <string notr="true">background-color: rgb(51, 167, 181);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame">
@@ -114,21 +114,18 @@ font: 20pt &quot;Segoe UI&quot;;</string>
      <string>palauta</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>263</x>
       <y>220</y>
       <width>298</width>
-      <height>58</height>
+      <height>85</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
-        <widget class="QLineEdit" name="lastnameLineEdit"/>
-       </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="lastFocusPushButton">
          <property name="text">
@@ -145,6 +142,9 @@ font: 20pt &quot;Segoe UI&quot;;</string>
           <string>PushButton</string>
          </property>
         </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="lastnameLineEdit"/>
        </item>
       </layout>
      </item>

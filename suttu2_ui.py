@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setPointSize(24)
         MainWindow.setFont(font)
-        MainWindow.setStyleSheet(u"background-color: rgb(117, 51, 65);")
+        MainWindow.setStyleSheet(u"background-color: rgb(51, 167, 181);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.frame = QFrame(self.centralwidget)
@@ -58,41 +58,41 @@ class Ui_MainWindow(object):
         self.resetPositionspushButton.setStyleSheet(u"background-color: rgb(0, 62, 186);\n"
 "color: rgb(4, 4, 4);\n"
 "font: 20pt \"Segoe UI\";")
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(263, 220, 298, 58))
-        self.gridLayout = QGridLayout(self.widget)
+        self.layoutWidget = QWidget(self.centralwidget)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(263, 220, 298, 85))
+        self.gridLayout = QGridLayout(self.layoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
-        self.lastnameLineEdit = QLineEdit(self.widget)
-        self.lastnameLineEdit.setObjectName(u"lastnameLineEdit")
-
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.lastnameLineEdit)
-
-        self.lastFocusPushButton = QPushButton(self.widget)
+        self.lastFocusPushButton = QPushButton(self.layoutWidget)
         self.lastFocusPushButton.setObjectName(u"lastFocusPushButton")
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.lastFocusPushButton)
 
-        self.firstNameLineEdit = QLineEdit(self.widget)
+        self.firstNameLineEdit = QLineEdit(self.layoutWidget)
         self.firstNameLineEdit.setObjectName(u"firstNameLineEdit")
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.firstNameLineEdit)
 
-        self.pushButton_2 = QPushButton(self.widget)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.firstNAmepushButton = QPushButton(self.layoutWidget)
+        self.firstNAmepushButton.setObjectName(u"firstNAmepushButton")
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.pushButton_2)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.firstNAmepushButton)
+
+        self.lastnameLineEdit = QLineEdit(self.layoutWidget)
+        self.lastnameLineEdit.setObjectName(u"lastnameLineEdit")
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.lastnameLineEdit)
 
 
         self.gridLayout.addLayout(self.formLayout, 0, 0, 1, 1)
 
-        self.pushButton_3 = QPushButton(self.widget)
-        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.pushButton = QPushButton(self.layoutWidget)
+        self.pushButton.setObjectName(u"pushButton")
 
-        self.gridLayout.addWidget(self.pushButton_3, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.pushButton, 0, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -115,7 +115,7 @@ class Ui_MainWindow(object):
         self.okPushButton.setText(QCoreApplication.translate("MainWindow", u"OK", None))
         self.resetPositionspushButton.setText(QCoreApplication.translate("MainWindow", u"palauta", None))
         self.lastFocusPushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"LastFocus", None))
+        self.firstNAmepushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"LastFocus", None))
     # retranslateUi
 
