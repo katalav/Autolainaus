@@ -17,8 +17,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLineEdit,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QSizePolicy, QStatusBar, QWidget)
+    QMainWindow, QMenu, QMenuBar, QPlainTextEdit,
+    QPushButton, QSizePolicy, QStatusBar, QWidget)
 import testpictures_rc
 
 class Ui_MainWindow(object):
@@ -184,6 +184,21 @@ class Ui_MainWindow(object):
         self.startFrame.setStyleSheet(u"background-color: rgb(0, 33, 72);")
         self.startFrame.setFrameShape(QFrame.Shape.StyledPanel)
         self.startFrame.setFrameShadow(QFrame.Shadow.Raised)
+        self.vapaanaLabel = QLabel(self.startFrame)
+        self.vapaanaLabel.setObjectName(u"vapaanaLabel")
+        self.vapaanaLabel.setGeometry(QRect(90, 30, 121, 31))
+        self.vapaanaLabel.setStyleSheet(u"font: 22pt \"Segoe UI\";")
+        self.ajossaLabel = QLabel(self.startFrame)
+        self.ajossaLabel.setObjectName(u"ajossaLabel")
+        self.ajossaLabel.setGeometry(QRect(540, 30, 81, 41))
+        self.ajossaLabel.setStyleSheet(u"font: 22pt \"Segoe UI\";")
+        self.availablePlainTextEdit = QPlainTextEdit(self.startFrame)
+        self.availablePlainTextEdit.setObjectName(u"availablePlainTextEdit")
+        self.availablePlainTextEdit.setGeometry(QRect(50, 110, 261, 271))
+        self.availablePlainTextEdit.setStyleSheet(u"font: 16pt \"Segoe UI\";")
+        self.rentedPlainTextEdit = QPlainTextEdit(self.startFrame)
+        self.rentedPlainTextEdit.setObjectName(u"rentedPlainTextEdit")
+        self.rentedPlainTextEdit.setGeometry(QRect(470, 100, 221, 321))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -241,6 +256,8 @@ class Ui_MainWindow(object):
         self.takeCarPushButton.setText(QCoreApplication.translate("MainWindow", u"Lainaus", None))
         self.returnCarPushButton.setText(QCoreApplication.translate("MainWindow", u"Palautus", None))
         self.goBackPushButton.setText(QCoreApplication.translate("MainWindow", u"Kumoa", None))
+        self.vapaanaLabel.setText(QCoreApplication.translate("MainWindow", u"Vapaana", None))
+        self.ajossaLabel.setText(QCoreApplication.translate("MainWindow", u"Ajossa", None))
         self.menuTiedosto.setTitle(QCoreApplication.translate("MainWindow", u"Tiedosto", None))
         self.menutesti.setTitle(QCoreApplication.translate("MainWindow", u"testi", None))
     # retranslateUi

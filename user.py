@@ -26,6 +26,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
 
+        # luodaan säikeistystä varten uusi säievatanto
+        #self.treadedPool = QTreatedPool().globalInstance()
+    
         # Luodaan käyttöliittymä konvertoidun tiedoston perusteella MainWindow:n ui-ominaisuudeksi. Tämä suojaa lopun MainWindow-olion ylikirjoitukselta, kun ui-tiedostoa päivitetään
         self.ui = Ui_MainWindow()
 
@@ -42,10 +45,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 
                 jsonData = settingsFile.read()
                 self.currentSettings = json.loads(jsonData)
-         # Puretaan salasana tietokantaoperaatioita varten  
+                
+            # Puretaan salasana tietokantaoperaatioita varten  
             self.plainTextPassword = cipher.decryptString(self.currentSettings['password'])
+        
+        # Jos asetusten luku ei onnistu, näytetään virhedialogi
         except Exception as error:
-            self.openWarning()
+            title = 'Tietokanta-asetusten luku ei onnistunut'
+            text = 'Tietokanta-asetuksien avaaminen ja salasanan purku ei onnistunut'
+            detailText = str(error)
+            self.openWarning(title, text, detailText)
             
         
         # Ohjelman käynnistyksessä piilotetaan tarpeettomat elementit
@@ -95,6 +104,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #Palauta käyttöliittymä alkutilanteeseen
     def setInitialElements(self):
         self.ui.startFrame.show()
+        self.ui.ajossaLabel.show()
+        self.ui.vapaanaLabel.show()
+        self.ui.availablePlainTextEdit.show()
+        self.ui.rentedPlainTextEdit.show()
         self.ui.namesFrame.show()
         self.ui.teacherLabel.show()
         self.ui.statusbar.show()
@@ -119,6 +132,40 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeReturnLineEdit.hide()
         self.ui.keyBarcodeReturnLineEdit.clear()
         self.ui.lainausInfoframe.hide()
+        
+        # TODO: Lisää rutiini joka hakee vapaat autot 
+        
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            freeVehicles = dbConnection.readAllColumnsFromTable('vapaana')
+            print(freeVehicles)
+            
+            # määritellään vapaana olevien autojen tiedot
+            #availablePlainTextEdit
+            availableVehiclesData = ''
+            text = ''
+            
+            for vehiclTuple in freeVehicles:
+                rowData = ''
+                for vehicleData in vehiclTuple:
+                    rowData = rowData + f'{vehicleData} '
+                text = rowData + 'henkilöä\n'
+                availableVehiclesData = availableVehiclesData + text
+
+            print(availableVehiclesData)
+            
+        except Exception as e:
+            title = 'Autotietojen lukeminen ei onnistu'
+            text = 'Vapaiden autojen tiedot eivät ole saatavissa'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
+        
+        # TODO: Lisää rutiini joka hakee ajossa olevat autot 
         
     # Näyttää "lue ajokortti" labolin ja syöttö kentän
     def activateLender(self):
