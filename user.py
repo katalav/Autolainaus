@@ -133,7 +133,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeReturnLineEdit.clear()
         self.ui.lainausInfoframe.hide()
         
-        # TODO: Lisää rutiini joka hakee vapaat autot 
+    
         
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
@@ -143,7 +143,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
             freeVehicles = dbConnection.readAllColumnsFromTable('vapaana')
-            print(freeVehicles)
+           
             
             # määritellään vapaana olevien autojen tiedot
             #availablePlainTextEdit
@@ -157,7 +157,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 text = rowData + 'henkilöä\n'
                 availableVehiclesData = availableVehiclesData + text
 
-            print(availableVehiclesData)
+            self.ui.availablePlainTextEdit.setPlainText(availableVehiclesData)
             
         except Exception as e:
             title = 'Autotietojen lukeminen ei onnistu'
