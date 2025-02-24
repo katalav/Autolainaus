@@ -143,21 +143,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
             freeVehicles = dbConnection.readAllColumnsFromTable('vapaana')
-           
-            
-            # määritellään vapaana olevien autojen tiedot
-            #availablePlainTextEdit
-            availableVehiclesData = ''
-            text = ''
-            
-            for vehiclTuple in freeVehicles:
-                rowData = ''
-                for vehicleData in vehiclTuple:
-                    rowData = rowData + f'{vehicleData} '
-                text = rowData + 'henkilöä\n'
-                availableVehiclesData = availableVehiclesData + text
+           # muodostetaan luettelo vapaista autoista createCatalog-metodilla
+            catalogData = self.createCatalog(freeVehicles, 'paikkaa')
 
-            self.ui.availablePlainTextEdit.setPlainText(availableVehiclesData)
+            self.ui.availablePlainTextEdit.setPlainText(catalogData)
             
         except Exception as e:
             title = 'Autotietojen lukeminen ei onnistu'
@@ -272,6 +261,33 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setInitialElements()
         self.ui.statusbar.showMessage('Toiminto peruutettiin', 5000)
 
+    # Metodi monirivisen luettelon muodostamiseen taulu tai näkymän datasta
+    def createCatalog(self, tupleList: list, suffix='') -> str:
+        """Creates a catalog like text for plainText edits from list of tuples.
+        Typically list comes from a database table or view
+
+
+        Args:
+            tupleList (list): list of tuples containing table data
+            suffix (str, optional): phraset to add to the end of the line. Defaults to ''.
+
+        Returns:
+            str: Plain text for thr catalog
+        """
+        # määritellään vapaana olevien autojen tiedot
+        #availablePlainTextEdit
+        catalogData = ''
+        rowText = ''
+            
+        for vehiclTuple in tupleList:
+            rowData = ''
+            for vehicleData in vehiclTuple:
+                rowData = rowData + f'{vehicleData} '
+            rowText = rowData + f'{suffix}\n'
+            catalogData = catalogData + rowText
+        return catalogData
+
+            
     # Avataan MessageBox
     def openWarning(self):
         msgBox = QtWidgets.QMessageBox()
