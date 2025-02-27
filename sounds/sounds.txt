@@ -1,6 +1,6 @@
 syötä ajokortinviivakoodi koneeseen -> drivingLicence.wav
 lue avaimenperän viivakoodi -> readKey.wav
-Auton lainaus onnistui <>lendingOk.wav
+Auton lainaus onnistui ->lendingOk.wav
 Auto palautettu, lainaus päättynyt -> returnOk.wav
 ajokortin viivakoodin luku epäonnistui -> driverIdFailed.vaw
 avaimmen viivakoodin luku epäonnistui -> keyReadFailed.wav

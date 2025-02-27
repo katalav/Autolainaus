@@ -9,11 +9,13 @@ import sys # Käynnistysargumentit
 import json # JSON-tiedostojen käsittely
 
 from PySide6 import QtWidgets # Qt-vimpaimet
+from PySide6.QtCore import QThreadPool, Slot, Qt # Säikeistys, slot-dekoraattori ja Qt
+from PySide6.QtGui import (QCursor) # Ohjelmalliset kursorin muutokset
 
-from lendingModules import sound #äänitoiminnot
+from lendingModules import sound # Äänitoiminnot
 from lendingModules import dbOperations # Tietokantatoiminnot
 from lendingModules import cipher # Salausmoduuli
- 
+
 # mainWindow_ui:n tilalle käännetyn pääikkunan tiedoston nimi
 # ilman .py-tiedostopäätettä
 from user_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
@@ -98,10 +100,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # OHJELMOIDUT SLOTIT
     # ------------------
     
-    #soita parametrina annettu äänitiedosto
+
+    # Soita parametrina annettu äänistiedosto (työfunktio)
+    @Slot(str)
+    def playSoundFile(self, soundFileName):
+        fileAndPath = 'sounds\\' + soundFileName
+        sound.playWav(fileAndPath)
     
+    # Säikeen käynnistävä funktio 
+    @Slot(str)
+    def playSoundInTread(self, soundFileName):
+        self.threadPool.start(lambda: self.playSoundFile(soundFileName))
     
-        #Palauta käyttöliittymä alkutilanteeseen
+        #Palauta käyttöliittymä alkutilanteeseen ja päivittää vapaiden ja lainattujen autojen tiedot
+    @Slot()
     def setInitialElements(self):
         self.ui.startFrame.show()
         self.ui.ajossaLabel.show()
@@ -127,11 +139,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.namesFrame.hide()
         self.ui.timeLabel.hide()
         self.ui.soundOnPushButton.hide()
-        self.ui.StudentsNameStatusLabel.hide()
+        self.ui.lenderNameLabel.hide()
+        self.ui.returnDayLabel.hide()
         self.ui.carsInfoStatusLabel.hide()
         self.ui.keyBarcodeReturnLineEdit.hide()
         self.ui.keyBarcodeReturnLineEdit.clear()
-        self.ui.lainausInfoframe.hide()
         
     
         
@@ -171,6 +183,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.openWarning(title, text, detailedText)
         
     # Näyttää "lue ajokortti" labolin ja syöttö kentän
+    @Slot()
     def activateLender(self):
         self.ui.namesFrame.show()
         self.ui.statusLabel.setText('Auton Lainaus')
@@ -185,18 +198,48 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusLabel.show()
         self.ui.savePushButton.hide()
         self.ui.startFrame.hide()
+        if self.soundOn:
+            self.playSoundInTread('drivingLicence.wav')
         
     #Näyttää "syätä avain" labolin ja avaimmen syöttö kentän
+    @Slot()
     def activateKey(self):
         self.ui.keyBarcodeLineEdit.show()
         self.ui.keyBarcodeLabel.show()
         self.ui.keyBarcodeLineEdit.setFocus()
-        self.ui.StudentsNameStatusLabel.show()
+        self.ui.lenderNameLabel.show()
         self.ui.savePushButton.hide()
-    
+        if self.soundOn:
+            self.playSoundInTread('readKey.wav')
+            
+        # TODO : Luetaan tietokannasta lainaajan nimi
+        # Tietokanta asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+        # Luetaan lainaajan tiedoista etunimi ja sukunimi
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            criteria = f"hetu = '{self.ui.readIdLineEdit.text()}'"
+            resultSet = dbConnection.filterColumsFromTable('lainaaja',['etunimi', 'sukunimi'], criteria)
+            row = resultSet[0]
+            lenderName = f'{row[0]} {row[1]}'
+            self.ui.lenderNameLabel.setText(lenderName)
+            
+            
+        except Exception as e:
+            title = 'Ajokortin lukeminen ei onnistunut'
+            text = 'ajokortin tietoja ei löytynyt, ota yhteys henkilökuntaan'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
 
+        
+        
+        
 
         #näyttää lainauksen tiedot näytölle
+    @Slot()
     def setLendingData(self):
         self.ui.carsInfoStatusLabel.show()
         self.ui.dateLabel.show()
@@ -204,9 +247,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.clockLabel.show()
         self.ui.timeLabel.show()
         self.ui.savePushButton.show()
-        self.ui.lainausInfoframe.show()
+
+        if self.soundOn:
+            self.playSoundInTread('saveData.wav')
     
        # Tallennetaan lainauksen tiedot ja palautetaan käyttöliittymä alkutilaan
+    @Slot()
     def saveLendingData(self):
         # Save data to the database
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -226,7 +272,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.setInitialElements()
             self.ui.statusbar.showMessage('Auton lainaustiedot tallennettiin', 5000)
             if self.soundOn:
-                sound.playWav('sounds\\lendingOk.WAV')   
+                sound.playWav('lendingOk.WAV')   
+                
         except Exception as e:
             title = 'Lainaustietojen tallentaminen ei onnistu'
             text = 'Ajokorttin tai auton tiedot virheelliset, ota yhteys henkilökuntaan!'
@@ -234,6 +281,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.openWarning(title, text, detailedText)
             
     # painettu lainaa-painiketta, kutsutaan activateReturnCar 
+    @Slot()
     def activateReturnCar(self):
         self.ui.goBackPushButton.show()
         self.ui.startFrame.hide()
@@ -253,9 +301,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeReturnLineEdit.setFocus()
         
     # Tallennetaan palautuksen tiedot tietokantaan ja palautetaan UI alkutilaan
+    @Slot()
     def saveReturnCarData(self):
         self.ui.statusbar.showMessage('auto palautettu')
         self.setInitialElements()
+        if self.soundOn:
+            self.playSoundInTread('returnOk.wav')
             
     # Mykistetään äänet
     def mute(self):
@@ -265,6 +316,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.soundOn = False
     
     # Poistetaan mykistys
+    @Slot()
     def unmute(self):
         self.ui.soundOffPushButton.show()
         self.ui.soundOnPushButton.hide()
