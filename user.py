@@ -155,6 +155,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.openWarning(title, text, detailedText)
         
         # TODO: Lisää rutiini joka hakee ajossa olevat autot 
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            rentedVehicles = dbConnection.readAllColumnsFromTable('ajossa')
+           # muodostetaan luettelo vapaista autoista createCatalog-metodilla
+            catalogData = self.createCatalog(rentedVehicles)
+
+            self.ui.rentedPlainTextEdit.setPlainText(catalogData)
+            
+        except Exception as e:
+            title = 'Autotietojen lukeminen ei onnistu'
+            text = 'Ajossa olevien autojen tiedot eivät ole saatavissa'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
         
     # Näyttää "lue ajokortti" labolin ja syöttö kentän
     def activateLender(self):
