@@ -39,6 +39,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
+        
 
         # Rutiini, joka lukee asetukset, jos ne ovat olemassa
         try:
@@ -55,9 +56,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as error:
             title = 'Tietokanta-asetusten luku ei onnistunut'
             text = 'Tietokanta-asetuksien avaaminen ja salasanan purku ei onnistunut'
-            detailText = str(error)
-            self.openWarning(title, text, detailText)
-            
+            detailedText = str(error)
+            self.openWarning(title, text, detailedText)      
+
+
         
         # Ohjelman käynnistyksessä piilotetaan tarpeettomat elementit
         self.setInitialElements()
@@ -113,7 +115,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.threadPool.start(lambda: self.playSoundFile(soundFileName))
     
         #Palauta käyttöliittymä alkutilanteeseen ja päivittää vapaiden ja lainattujen autojen tiedot
-    @Slot()
+    
     def setInitialElements(self):
         self.ui.startFrame.show()
         self.ui.ajossaLabel.show()
@@ -143,6 +145,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.carsInfoStatusLabel.hide()
         self.ui.keyBarcodeReturnLineEdit.hide()
         self.ui.keyBarcodeReturnLineEdit.clear()
+        self.ui.savePushButton.setEnabled(True)
         
     
         
@@ -182,7 +185,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.openWarning(title, text, detailedText)
         
     # Näyttää "lue ajokortti" labolin ja syöttö kentän
-    @Slot()
+    
     def activateLender(self):
         self.ui.namesFrame.show()
         self.ui.statusLabel.setText('Auton Lainaus')
@@ -201,7 +204,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
      
         
     #Näyttää "syätä avain" labolin ja avaimmen syöttö kentän
-    @Slot()
     def activateKey(self):
         self.ui.keyBarcodeLineEdit.show()
         self.ui.keyBarcodeLabel.show()
@@ -254,7 +256,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
 
         #näyttää lainauksen tiedot näytölle
-    @Slot()
     def setLendingData(self):
         self.ui.carsInfoStatusLabel.show()
         self.ui.dateLabel.show()
@@ -274,21 +275,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
             criteria = f"rekisterinumero = '{self.ui.keyBarcodeLineEdit.text()}'"
-            resultSet = dbConnection.filterColumsFromTable('auto',['merkki', 'malli', 'henkilomaara'], criteria)
+            resultSet = dbConnection.filterColumsFromTable('vapaana',['merkki', 'malli', 'henkilomaara'], criteria)
             row = resultSet[0]
             carData = f'{row[0]} {row[1]} {row[2]} henkilöä'
+            print('Auton tiedot', carData)
             self.ui.carsInfoStatusLabel.setText(carData)
             
             
         except Exception as e:
-            title = 'Avaimmen lukeminen ei onnistunut'
-            text = 'Avaimmen tietoja ei löytynyt, ota yhteys henkilökuntaan'
+            title = 'Auton lainaaminen ei ole mahdollista'
+            text = 'Auton palautus on tekemättä, ota yhteys henkilökuntaan'
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
 
     
        # Tallennetaan lainauksen tiedot ja palautetaan käyttöliittymä alkutilaan
-    @Slot()
+
     def saveLendingData(self):
         # Save data to the database
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -316,7 +318,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.openWarning(title, text, detailedText)
             
     # painettu lainaa-painiketta, kutsutaan activateReturnCar 
-    @Slot()
     def activateReturnCar(self):
         self.ui.goBackPushButton.show()
         self.ui.startFrame.hide()
@@ -336,7 +337,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeReturnLineEdit.setFocus()
         
     # Tallennetaan palautuksen tiedot tietokantaan ja palautetaan UI alkutilaan
-    @Slot()
+
     def saveReturnCarData(self):
         self.ui.statusbar.showMessage('auto palautettu')
         self.setInitialElements()
@@ -346,7 +347,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
  
     
     # Poistetaan mykistys
-    @Slot()
+ 
   
     
     def goBack(self):
@@ -380,12 +381,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         return catalogData
 
             
-    # Avataan MessageBox
-    def openWarning(self):
+  # Avataan MessageBox
+    # Malli mahdollista virheilmoitusta varten
+    def openWarning(self, title: str, text:str, detailedText:str) -> None: 
+        """Opens a message box for errors
+
+        Args:
+            title (str): The title of the message box
+            text (str): Error message
+            detailedText (str): Detailed error message typically from source
+        """
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-        msgBox.setWindowTitle('Tietokantayhteyttä ei voitu muodostaa!')
-        msgBox.setText('Otayhteyttä järjestelmän valvojaan')
+        msgBox.setWindowTitle(title)
+        msgBox.setText(text)
+        msgBox.setDetailedText(detailedText)
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 
