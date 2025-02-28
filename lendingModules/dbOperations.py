@@ -8,7 +8,8 @@ A module to connect to a PostgreSQL database and do basic CRUD-operations (Creat
 # ---------------------
 
 # Ladattavat kirjastot
-import psycopg2
+import psycopg2 #PostgreSQL-ajuri
+import datetime
 
 # LUOKAT
 # ------
@@ -222,6 +223,51 @@ class DbConnection():
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
+
+    # Metodi, joka hakee tietokantapalvelimen aikaleiman
+    def getPgTimestamp(self) -> str:
+        """Reads PostgreSQL server's current timestamp and converts it to ISO date and time string
+
+        Raises:
+            e: An error message to propagate
+
+        Returns:
+            str: Date, time and timezone in ISO format
+        """
+        
+            
+
+        # Yritetään avata yhteys tietokantaan ja hakea tiedot
+        try:
+            # Luodaan yhteys tietokantaan
+            currentConnection = psycopg2.connect(self.connectionString)
+
+            # Luodaan kursori suorittamaan tietokantoperaatiota
+            cursor = currentConnection.cursor()
+
+               
+            # Määritellään SQL lause joka palauttaa aikaleiman ja aikavyöhykkeen
+            sqlClause = f'SELECT CURRENT_TIMESTAMP;'
+                
+            # Suoritetaan SQL-lause ja luetaan tulokset kursorista
+            cursor.execute(sqlClause)
+            records= cursor.fetchall()
+            row = records[0] # Listasta monikko (tuple)
+            column =row[0] # Monikosta arvo, joka tulee funktion tuottamana
+            isoDateTime = f'{column}' # Arvo merkkijonoksi muutettuna
+            return isoDateTime
+
+        # Jos tapahtuu virhe, välitetään se luokkaa käyttävälle ohjelmalle
+        except (Exception, psycopg2.Error) as e:
+            raise e 
+            
+        finally:
+
+            # Selvitetään muodostuiko yhteysolio
+            if currentConnection:
+                cursor.close() # Tuhotaan kursori
+                currentConnection.close() # Tuhotaan yhteys
+
 
 
 
