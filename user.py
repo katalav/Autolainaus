@@ -146,7 +146,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeReturnLineEdit.hide()
         self.ui.keyBarcodeReturnLineEdit.clear()
         self.ui.savePushButton.setEnabled(True)
-        
+        self.ui.savePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
     
         
         dbSettings = self.currentSettings
@@ -286,7 +286,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             title = 'Auton lainaaminen ei ole mahdollista'
             text = 'Auton palautus on tekemättä, ota yhteys henkilökuntaan'
             detailedText = str(e)
+            
+            # TODO: Muuta Kursorin muoto
+            self.ui.savePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+            # otetaan painike pois käytöstä, muuttaa kursorin oletuskursoriksi
+            self.ui.savePushButton.setDisabled(True)
             self.openWarning(title, text, detailedText)
+            
+            # Muutetaan tilarivin teksti
+            self.ui.statusbar.showMessage(title)
 
     
        # Tallennetaan lainauksen tiedot ja palautetaan käyttöliittymä alkutilaan
@@ -339,10 +347,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Tallennetaan palautuksen tiedot tietokantaan ja palautetaan UI alkutilaan
 
     def saveReturnCarData(self):
+
+        # Save data to the database
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+        dbConnection = dbOperations.DbConnection(dbSettings)
+        criteria = f"'{self.ui.keyBarcodeReturnLineEdit.text()}'" # TEkstiä -> Lisää ':t
+        
+        dbConnection.modifyTableData('lainaus', 'palautus','CURRENT_TIMESTAMP', 'rekisterinumero', criteria)        
+        
         self.ui.statusbar.showMessage('auto palautettu')
         self.setInitialElements()
-   
-            
     # Mykistetään äänet
  
     
