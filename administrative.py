@@ -12,6 +12,7 @@ import json # JSON-objektien ja tiedostojen käsittely
 # Asennuksen vaativat kirjastot
 
 from PySide6 import QtWidgets # Qt-vimpaimet
+from PySide6 import QtGui
 
 
 # Käyttöliittymämoduulien lataukset
@@ -63,6 +64,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             
         except Exception as e:
             self.openSettingsDialog()
+            
+        self.vehiclePicture = 'uiPictures\\noPicture.png'
 
         # FIXME: Poista kaikki print-komennot, kun koodi on muuten valmista!
 
@@ -82,8 +85,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.saveGroupPushButton.clicked.connect(self.saveGroup)
         self.ui.savePersonPushButton.clicked.connect(self.savePerson)
         self.ui.saveVehiclePushButton.clicked.connect(self.saveVehicle)
-        
-
+        # TODO: Painike openPicturesPushButton klikkaus kutsuu openPicture-dialogi
+        self.ui.openPicturesPushButton.clicked.connect(self.openPicture)
         
    
    
@@ -116,7 +119,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.updateGroupTableWidget() # Ryhmien tiedot
     # Välilehtien slotit
     # ------------------
-    # Ryhmän valinta -ruudun arvojen päivitys
+    # Ryhmän valinta ja ajoneuvotyyppi ruutujen arvojen päivitys
     def updateCombos(self):
 
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -129,8 +132,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Tehdään lista ryhmät-yhdistelmäruudun arvoista
         groupList = dbConnection.readColumsFromTable('ryhma',['ryhma'])
-
-        
         groupStringList = []
         for item in groupList:
             stringValue = str(item[0])
@@ -138,7 +139,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.ui.groupComboBox.clear()
         self.ui.groupComboBox.addItems(groupStringList)
+        
+        # Tehdään lista ajoneuvotyypit-yhdistelmäruudun arvoista
 
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista ryhmät-yhdistelmäruudun arvoista
+        typeList = dbConnection.readColumsFromTable('ajoneuvotyyppi', ['tyyppi'])
+
+        
+        typeStringList = []
+        for item in typeList:
+            stringValue = str(item[0])
+            typeStringList.append(stringValue)
+        
+        self.ui.vehicleTypecomboBox.clear()
+        self.ui.vehicleTypecomboBox.addItems(typeStringList)
+        
     # Lainaajat-taulukon päivitys
     def updateLenderTableWidget(self):
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -182,7 +200,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print('Auto-taulun tiedot:', tableData)
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä']
+        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Vastuuhenkilö', 'Tyyppi']
         self.ui.vehicleCatalogTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -283,7 +301,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.updateLenderTableWidget()
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e)) 
-
+    
+    # TODO: Ajoneuvojen kuvan lataaminen
+    def openPicture(self):
+        userPath = os.path.expanduser('~')
+        pathToPictureFolder = userPath + '\\Pictures'
+        fileName, check =QtWidgets.QFileDialog.getOpenFileName(None, 'Valitse auton kuva', pathToPictureFolder, 'Kuvat (*.png *.jpg)')
+        
+        # Jos kuvatiedosto on valittu
+        if fileName:
+            self.vehiclePicture = fileName
+            
+        vehiclePixmap = QtGui.QPixmap(self.vehiclePicture)
+        self.ui.carPhotoLabel.setPixmap(vehiclePixmap)
+        
+        
     # Ajoneuvon tallennus
     def saveVehicle(self):
         # Määritellään tietokanta-asetukset
@@ -296,6 +328,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         model = self.ui.modelLineEdit.text()
         year = self.ui.modelYearLineEdit.text()
         capacity = int(self.ui.capacityLineEdit.text())
+        vehicleType = self.ui.vehicleTypecomboBox.currentText()
+        responsiblePerson = self.ui.vehicleOwnerLineEdit.text()
+        
         # Määritellään tallennusmetodin vaatimat parametrit
         tableName = 'auto'
         
@@ -303,7 +338,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                           'merkki': manufacturer,
                           'malli': model,
                           'vuosimalli': year,
-                          'henkilomaara': capacity}
+                          'henkilomaara': capacity,
+                          'tyyppi': vehicleType,
+                          'vastuuhenkilo': responsiblePerson
+                          }
         
         # Luodaan tietokantayhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
@@ -314,6 +352,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.updateVehicleTableWidget()
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e))
+            
+            
+        # Luodaan kuvatiedosto ja päivitetään auto- taulua
+        with open(self.vehiclePicture, 'rb') as pictureFile:
+            pictureData = pictureFile.read()
+            
+        # Luodaan uusi yhteys, koska edellinen suljettiin
+        dbConnection2 = dbOperations.DbConnection(dbSettings)
+        try:     
+            dbConnection2.updateBinaryField('auto','kuva', 'rekisterinumero', f"'{numberPlate}'", pictureData)
+            self.refreshUi()
+
+        except Exception as e: 
+            self.openWarning('Kuvan päivitys ei onnistunut', str(e))
 
     # Virheilmoitukset ja muut Message Box -dialogit
     # ----------------------------------------------
@@ -377,7 +429,8 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
 
         # Suljepainikkeen toiminnot
         self.ui.closePushButton.clicked.connect(self.closeSettingsDialog)
-    # OHJELMOIDUT SLOTIT (Luokan metodit)
+        
+        # OHJELMOIDUT SLOTIT (Luokan metodit)
     # -----------------------------------
 
     # Tallennetaan käyttöliittymään syötetyt asetukset tiedostoon

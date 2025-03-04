@@ -286,19 +286,16 @@ class DbConnection():
             
         """
 
-
         # Yritetään avata yhteys tietokantaan ja päivittää tietueita
         try:
             # Luodaan yhteys tietokantaan
             currentConnection = psycopg2.connect(self.connectionString)
-
             # Luodaan kursori suorittamaan tietokantoperaatiota
             cursor = currentConnection.cursor()
 
             # Määritellään lopullinen SQL-lause
             sqlClause = f'UPDATE {table} SET {column} = {newValue} WHERE {criteriaColumn} = {criteriaValue}'
             print(sqlClause)
-            
             # Suoritetaan SQL-lause
             cursor.execute(sqlClause)
 
@@ -314,8 +311,48 @@ class DbConnection():
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
-             
-        
+                
+    # Päivitetään taulun binäärisaraketta
+    def updateBinaryField(self, table: str, column: str, criteriaColumn: str, criteriaValue, data):
+        """Updates a given bytea column in a table accorting to to criteria
+
+        Args:
+            table (str): Name of the table to update
+            column (str): Name of the column to update
+            criteriaColumn (str): Name of the column used to filter rows
+            criteriaValue: Value of the filtering criteria
+            data: Binary date to ubdate with
+        """
+                # Yritetään avata yhteys tietokantaan ja päivittää tietueita
+        try:
+            # Luodaan yhteys tietokantaan
+            currentConnection = psycopg2.connect(self.connectionString)
+            # Luodaan kursori suorittamaan tietokantoperaatiota
+            cursor = currentConnection.cursor()
+
+            # Määritellään lopullinen SQL-lause, paikkamerkki %s korvautuu binääritiedolla
+            sqlClause = f'UPDATE {table} SET  {column} = %s WHERE {criteriaColumn} = {criteriaValue}'
+            print(sqlClause)
+            # Suoritetaan SQL-lause
+            cursor.execute(sqlClause, (data,))
+
+            # Vahvistetaan tapahtuma (transaction)
+            currentConnection.commit()
+
+        # Jos tapahtuu virhe, välitetään se luokkaa käyttävälle ohjelmalle
+        except (Exception, psycopg2.Error) as e:
+            raise e 
+        finally:
+
+            # Selvitetään muodostuiko yhteysolio
+            if currentConnection:
+                cursor.close() # Tuhotaan kursori
+                currentConnection.close() # Tuhotaan yhteys
+                
+    #TODO: Tee metodi tietueen poistamiseen 
+    def deleteRowFromTable(self, table,criteriaColumn, criteriaValue):
+        pass
+
 if __name__ == "__main__":
 
     testDictionary = {'server': 'localhost',
