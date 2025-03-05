@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.namesFrame = QFrame(self.centralwidget)
         self.namesFrame.setObjectName(u"namesFrame")
-        self.namesFrame.setGeometry(QRect(30, 190, 891, 501))
+        self.namesFrame.setGeometry(QRect(30, 190, 941, 501))
         self.namesFrame.setStyleSheet(u"background-color: rgb(0, 98, 117);")
         self.savePushButton = QPushButton(self.namesFrame)
         self.savePushButton.setObjectName(u"savePushButton")

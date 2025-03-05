@@ -60,6 +60,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.openWarning(title, text, detailedText)      
 
 
+        self.defaultVehiclePicture = QPixmap('uiPictures\\defaultVehicles.png')
         
         # Ohjelman käynnistyksessä piilotetaan tarpeettomat elementit
         self.setInitialElements()
@@ -145,10 +146,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.carsInfoStatusLabel.hide()
         self.ui.keyBarcodeReturnLineEdit.hide()
         self.ui.keyBarcodeReturnLineEdit.clear()
-        self.ui.savePushButton.setEnabled(True)
         self.ui.savePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-    
+        self.ui.savePushButton.setEnabled(True)
         
+        # Palautetaan auton oletuskuva
+        self.ui.carPhotoLabel.setPixmap(self.defaultVehiclePicture)
+        
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
@@ -389,10 +393,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.ui.statusbar.showMessage('auto palautettu')
         self.setInitialElements()
-    # Mykistetään äänet
- 
-    
-    # Poistetaan mykistys
+        
  
   
     

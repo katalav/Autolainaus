@@ -35,7 +35,7 @@
      <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
@@ -266,7 +266,7 @@ color: rgb(255, 255, 255);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="removeLenderPushButton">
+     <widget class="QPushButton" name="deletePersonPushButton">
       <property name="geometry">
        <rect>
         <x>310</x>
@@ -896,7 +896,7 @@ color: rgb(255, 255, 255);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="removeGroupPushButton_2">
+     <widget class="QPushButton" name="deleteGroupPushButton">
       <property name="geometry">
        <rect>
         <x>300</x>

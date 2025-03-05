@@ -153,12 +153,12 @@ class Ui_MainWindow(object):
 
         self.studentLabelsVerticalLayout.addWidget(self.emailLabel)
 
-        self.removeLenderPushButton = QPushButton(self.lenderTab)
-        self.removeLenderPushButton.setObjectName(u"removeLenderPushButton")
-        self.removeLenderPushButton.setGeometry(QRect(310, 110, 71, 23))
-        self.removeLenderPushButton.setFont(font1)
-        self.removeLenderPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.removeLenderPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+        self.deletePersonPushButton = QPushButton(self.lenderTab)
+        self.deletePersonPushButton.setObjectName(u"deletePersonPushButton")
+        self.deletePersonPushButton.setGeometry(QRect(310, 110, 71, 23))
+        self.deletePersonPushButton.setFont(font1)
+        self.deletePersonPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.deletePersonPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "background-color: rgb(255, 1, 5);")
         self.tabWidget.addTab(self.lenderTab, "")
         self.vehicleTab = QWidget()
@@ -374,12 +374,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.responsiblePLabel_2)
 
-        self.removeGroupPushButton_2 = QPushButton(self.groupsTab)
-        self.removeGroupPushButton_2.setObjectName(u"removeGroupPushButton_2")
-        self.removeGroupPushButton_2.setGeometry(QRect(300, 30, 81, 21))
-        self.removeGroupPushButton_2.setFont(font1)
-        self.removeGroupPushButton_2.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.removeGroupPushButton_2.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+        self.deleteGroupPushButton = QPushButton(self.groupsTab)
+        self.deleteGroupPushButton.setObjectName(u"deleteGroupPushButton")
+        self.deleteGroupPushButton.setGeometry(QRect(300, 30, 81, 21))
+        self.deleteGroupPushButton.setFont(font1)
+        self.deleteGroupPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.deleteGroupPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "background-color: rgb(255, 1, 5);")
         self.tabWidget.addTab(self.groupsTab, "")
         self.reportsTab = QWidget()
@@ -451,7 +451,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -470,7 +470,7 @@ class Ui_MainWindow(object):
         self.groupLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4", None))
         self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajokorttiluokka", None))
         self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
-        self.removeLenderPushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
+        self.deletePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.lenderTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
         self.numberPlateLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.manufacturerLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki", None))
@@ -490,7 +490,7 @@ class Ui_MainWindow(object):
         self.savedGroupsLabel.setText(QCoreApplication.translate("MainWindow", u"Tallennetut ryhm\u00e4t", None))
         self.groupNameLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4n nimi", None))
         self.responsiblePLabel_2.setText(QCoreApplication.translate("MainWindow", u"Vastuuhenkil\u00f6", None))
-        self.removeGroupPushButton_2.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
+        self.deleteGroupPushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.groupsTab), QCoreApplication.translate("MainWindow", u"Ryhm\u00e4t", None))
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))

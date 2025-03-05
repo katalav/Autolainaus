@@ -68,6 +68,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Asetetaan auton oletuskuvaksi harmaa kamera
         self.vehiclePicture = 'uiPictures\\noPicture.png'
         self.vehicleToDelete = ''
+        self.personToDelete = ''
+        self.groupToDelete = ''
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
@@ -87,9 +89,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.saveVehiclePushButton.clicked.connect(self.saveVehicle)
         self.ui.openPicturesPushButton.clicked.connect(self.openPicture)
         self.ui.removeVehiclePushButton.clicked.connect(self.deleteVehicle)
+        self.ui.deletePersonPushButton.clicked.connect(self.deletePerson)
+        self.ui.deleteGroupPushButton.clicked.connect(self.deleteGroup)
         
         # Taulukoiden soluvalinnat
         self.ui.vehicleCatalogTableWidget.cellClicked.connect(self.setRegisterNumber)
+        self.ui.registeredPersonsTableWidget.cellClicked.connect(self.setSSN)
+        self.ui.savedGroupsTableWidget.cellClicked.connect(self.setGroup)
         
    
    
@@ -124,6 +130,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.updateVehicleTableWidget() # Autojen tiedot
         self.updateGroupTableWidget() # Ryhmien tiedot
         self.ui.removeVehiclePushButton.setEnabled(False) # Otetaan auton-poisto painike pois käytöstä
+        self.ui.deletePersonPushButton.setEnabled(False) # Otetaan lainaajan poisto-painike pois käytöstä
+        self.ui.deleteGroupPushButton.setEnabled(False) # Otetaan ryhmän poisto-painike pois käytöstä
         
     # Välilehtien slotit
     # ------------------
@@ -371,8 +379,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with open(self.vehiclePicture, 'rb') as pictureFile:
             pictureData = pictureFile.read()
             
+            # Tätä voisi muokata siten, että tallennetaan tietokanta pixmap
+            #jollin user.py:ssä voitaisiin suoraan päivittää auton kuva 
+            #tallentamatta sitä ensin levylle.
+            
         # Luodaan uusi yhteys, koska edellinen suljettiin
         dbConnection2 = dbOperations.DbConnection(dbSettings)
+        
         try:     
             dbConnection2.updateBinaryField('auto','kuva', 'rekisterinumero', f"'{numberPlate}'", pictureData)
             self.refreshUi()
@@ -397,6 +410,40 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             self.openWarning('Poisto ei onnistunut', str(e)) 
             
+        
+    def deletePerson(self):
+
+         # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+         # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.deleteRowsFromTable('lainaaja', 'hetu', f"'{self.personToDelete}'")
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Poisto ei onnistunut', str(e)) 
+
+
+    def deleteGroup(self):
+
+         # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+         # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.deleteRowsFromTable('ryhma', 'ryhma', f"'{self.groupToDelete}'")
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Poisto ei onnistunut', str(e)) 
+            
     # Taulukoiden soluvalinnat
     #-------------------------
     
@@ -411,6 +458,42 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.vehicleToDelete = cellValue
         self.ui.statusbar.showMessage(f'valitun auton rekisterinumero on {cellValue}')
         self.ui.removeVehiclePushButton.setEnabled(True)
+    
+    def setRegisterNumber(self):
+        rowIndex = 0
+        columnIndex = 0
+        cellValue = ''
+        
+        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
+        rowIndex = self.ui.vehicleCatalogTableWidget.currentRow()
+        cellValue = self.ui.vehicleCatalogTableWidget.item(rowIndex, columnIndex).text()
+        self.vehicleToDelete = cellValue
+        self.ui.statusbar.showMessage(f'valitun auton rekisterinumero on {cellValue}')
+        self.ui.removeVehiclePushButton.setEnabled(True)
+        
+    def setSSN(self):
+        rowIndex = 0
+        columnIndex = 0
+        cellValue = ''
+        
+        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
+        rowIndex = self.ui.registeredPersonsTableWidget.currentRow()
+        cellValue = self.ui.registeredPersonsTableWidget.item(rowIndex, columnIndex).text()
+        self.personToDelete = cellValue
+        self.ui.statusbar.showMessage(f'valitun käyttäjän henkilötunnus on {cellValue}')
+        self.ui.deletePersonPushButton.setEnabled(True)
+        
+    def setGroup(self):
+        rowIndex = 0
+        columnIndex = 0
+        cellValue = ''
+        
+        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
+        rowIndex = self.ui.savedGroupsTableWidget.currentRow()
+        cellValue = self.ui.savedGroupsTableWidget.item(rowIndex, columnIndex).text()
+        self.groupToDelete = cellValue
+        self.ui.statusbar.showMessage(f'valitun ryhmän nimi on {cellValue}')
+        self.ui.deleteGroupPushButton.setEnabled(True)
     
 
     # Virheilmoitukset ja muut Message Box -dialogit
