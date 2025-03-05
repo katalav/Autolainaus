@@ -38,7 +38,7 @@ background-color: rgb(51, 167, 181);</string>
      <rect>
       <x>30</x>
       <y>190</y>
-      <width>851</width>
+      <width>891</width>
       <height>501</height>
      </rect>
     </property>
@@ -299,7 +299,7 @@ color: rgb(0, 33, 72);</string>
     <widget class="QLabel" name="carPhotoLabel">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>640</x>
        <y>210</y>
        <width>251</width>
        <height>191</height>

@@ -10,7 +10,7 @@ import json # JSON-tiedostojen käsittely
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 from PySide6.QtCore import QThreadPool, Slot, Qt # Säikeistys, slot-dekoraattori ja Qt
-from PySide6.QtGui import QPixmap, QCursor # Ohjelmalliset kursorin muutokset
+from PySide6.QtGui import QPixmap, QCursor # Kuvan luku ja kursorin muutokset
 
 from lendingModules import sound # Äänitoiminnot
 from lendingModules import dbOperations # Tietokantatoiminnot
@@ -266,26 +266,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.savePushButton.show()
         
         #Näyttää autontiedot
-        try:
-            # Luodaan tietokantayhteys-olio
-            dbConnection = dbOperations.DbConnection(dbSettings)
-            criteria = f"rekisterinumero = '{self.ui.keyBarcodeLineEdit.text()}'"
-            # Haetaan auton kuva auto-taulusta
-            resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
-            row = resultSet[0]
-            picture = row[0] #PNG tai JPG kuva tietokannasta
-            print('kuva on', picture)
-            
-            # BUG: Ei toimi, lataa kuvan binäärimuodossa mutta ei muunna kuvaa
-            pixmap = QPixmap(picture) # Muunnetaan rasteriksi
-            self.ui.carPhotoLabel.setPixmap(pixmap)
-            
-            
-        except Exception as e:
-            title = 'Auton kuvan lataaminen ei onnistunut'
-            text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
-            detailedText = str(e)
-            self.openWarning(title, text, detailedText)
 
         
         # Tietokanta asetukset
@@ -308,6 +288,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             title = 'Auton lainaaminen ei ole mahdollista'
             text = 'Auton palautus on tekemättä, ota yhteys henkilökuntaan'
             detailedText = str(e)
+            
+        # Auton kuva Hakee vielä paikkaa   
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            criteria = f"rekisterinumero = '{self.ui.keyBarcodeLineEdit.text()}'"
+            # Haetaan auton kuva auto-taulusta
+            resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
+            row = resultSet[0]
+            picture = row[0] #PNG tai JPG kuva tietokannasta
+            print('kuva on', picture)
+            
+            # Write the binary data to a file to store png or jpeg data
+            with open('currentCar.png', 'wb') as temporaryFile:
+                temporaryFile.write(picture)
+            
+            # Create a pixmap by reading the file and set label
+            pixmap =QPixmap('currentCar.png')
+            self.ui.carPhotoLabel.setPixmap(pixmap)
+            
+        except Exception as e:
+            title = 'Auton kuvan lataaminen ei onnistunut'
+            text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
             
             # Muuta Kursorin muoto
             self.ui.savePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
