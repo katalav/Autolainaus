@@ -122,6 +122,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Yleinen käyttöliittymän verestys (refresh)
     def refreshUi(self):
+        
         # Auton kuvaksi kameran kuva
         self.vehiclePicture = 'uiPictures\\noPicture.png' # Kuvan poluksi ei kuvaa symboli
         self.ui.carPhotoLabel.setPixmap(QtGui.QPixmap(self.vehiclePicture)) # auton kuvan päivitys
@@ -129,6 +130,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.updateLenderTableWidget() # Lainaajien tiedot
         self.updateVehicleTableWidget() # Autojen tiedot
         self.updateGroupTableWidget() # Ryhmien tiedot
+        self.updateDiaryTableWidget() # Ajopäiväkirja
         self.ui.removeVehiclePushButton.setEnabled(False) # Otetaan auton-poisto painike pois käytöstä
         self.ui.deletePersonPushButton.setEnabled(False) # Otetaan lainaajan poisto-painike pois käytöstä
         self.ui.deleteGroupPushButton.setEnabled(False) # Otetaan ryhmän poisto-painike pois käytöstä
@@ -172,6 +174,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.ui.vehicleTypecomboBox.clear()
         self.ui.vehicleTypecomboBox.addItems(typeStringList)
+        
+        # Lista ajopäiväkirjoista -> reporttinäkymien nimet
+        self.ui.reportTypecomboBox.addItem('Ajopäiväkirja -kaikki')
         
     # Lainaajat-taulukon päivitys
     def updateLenderTableWidget(self):
@@ -261,7 +266,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
                 self.ui.savedGroupsTableWidget.setItem(row, column, data)
 
+    
+    # Päivitetään ajopäiväkirjan taulukko
+    def updateDiaryTableWidget(self):
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista lainaaja-taulun tiedoista
+        tableData = dbConnection.readAllColumnsFromTable('ajopaivakirja')
         
+        #Tyhjennetään vanhat tiedot käyttöliittymästä ennen  uusien lukemista tietokannasta
+        self.ui.diaryTableWidget.clearContents()
+
+        # Määritellään taulukkoelementin otsikot
+        headerRow = ['Rekisteri', 'Merkki', 'HeTu', 'Sukunimi', 'Etunimi','Ryhmä', 'Otettu', 'Palautettu']
+        self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
+
+        # Asetetaan taulukon solujen arvot
+        for row in range(len(tableData)): # Luetaan listaa riveittäin
+            for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
+                
+                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
+                data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
+                self.ui.diaryTableWidget.setItem(row, column, data)
     # Painikkeiden slotit
     # -----------------
 

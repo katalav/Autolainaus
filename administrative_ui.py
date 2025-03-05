@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 783, 551))
+        self.tabWidget.setGeometry(QRect(0, 0, 941, 561))
         font = QFont()
         font.setPointSize(10)
         self.tabWidget.setFont(font)
@@ -330,7 +330,7 @@ class Ui_MainWindow(object):
         if (self.savedGroupsTableWidget.rowCount() < 10):
             self.savedGroupsTableWidget.setRowCount(10)
         self.savedGroupsTableWidget.setObjectName(u"savedGroupsTableWidget")
-        self.savedGroupsTableWidget.setGeometry(QRect(30, 120, 351, 192))
+        self.savedGroupsTableWidget.setGeometry(QRect(30, 120, 351, 331))
         self.savedGroupsTableWidget.setFont(font2)
         self.savedGroupsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ArrowCursor))
         self.savedGroupsTableWidget.setRowCount(10)
@@ -420,16 +420,16 @@ class Ui_MainWindow(object):
         self.printReportPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.printReportPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
-        self.tableWidget = QTableWidget(self.reportsTab)
-        if (self.tableWidget.columnCount() < 6):
-            self.tableWidget.setColumnCount(6)
-        if (self.tableWidget.rowCount() < 22):
-            self.tableWidget.setRowCount(22)
-        self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setGeometry(QRect(20, 160, 641, 321))
-        self.tableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
-        self.tableWidget.setRowCount(22)
-        self.tableWidget.setColumnCount(6)
+        self.diaryTableWidget = QTableWidget(self.reportsTab)
+        if (self.diaryTableWidget.columnCount() < 8):
+            self.diaryTableWidget.setColumnCount(8)
+        if (self.diaryTableWidget.rowCount() < 10000):
+            self.diaryTableWidget.setRowCount(10000)
+        self.diaryTableWidget.setObjectName(u"diaryTableWidget")
+        self.diaryTableWidget.setGeometry(QRect(20, 160, 861, 321))
+        self.diaryTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
+        self.diaryTableWidget.setRowCount(10000)
+        self.diaryTableWidget.setColumnCount(8)
         self.previewLabel = QLabel(self.reportsTab)
         self.previewLabel.setObjectName(u"previewLabel")
         self.previewLabel.setGeometry(QRect(20, 140, 61, 16))
@@ -451,7 +451,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

@@ -88,7 +88,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.returnCarPushButton.clicked.connect(self.activateReturnCar)
         
         #kun tallenna painiketta on painettu
-        self.ui.savePushButton.clicked.connect(self.saveReturnCarData)
+        self.ui.saveReturnPushButton.clicked.connect(self.saveReturnData)
         
         # Kun mykistä painiketta painetaan, kutsutaan mute-metodia
         #self.ui.soundOffPushButton.clicked.connect(self.mute)
@@ -139,13 +139,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.readIdLabel.hide()
         self.ui.keyBarcodeLabel.hide()
         self.ui.savePushButton.hide()
+        self.ui.saveReturnPushButton.hide()
         self.ui.namesFrame.hide()
         self.ui.timeLabel.hide()
         self.ui.lenderNameLabel.hide()
-        self.ui.returnDayLabel.hide()
         self.ui.carsInfoStatusLabel.hide()
         self.ui.keyBarcodeReturnLineEdit.hide()
         self.ui.keyBarcodeReturnLineEdit.clear()
+        self.ui.saveReturnPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.ui.saveReturnPushButton.setEnabled(True)
         self.ui.savePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.ui.savePushButton.setEnabled(True)
         
@@ -204,6 +206,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.takeCarPushButton.hide()
         self.ui.statusLabel.show()
         self.ui.savePushButton.hide()
+        self.ui.saveReturnPushButton.hide()
         self.ui.startFrame.hide()
      
         
@@ -372,14 +375,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeLabel.show()
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
+        self.ui.savePushButton.hide()
         self.ui.statusLabel.show()
-        self.ui.savePushButton.show()
+        self.ui.saveReturnPushButton.show()
         self.ui.returnDayLabel.hide()
         self.ui.keyBarcodeReturnLineEdit.setFocus()
         
     # Tallennetaan palautuksen tiedot tietokantaan ja palautetaan UI alkutilaan
 
-    def saveReturnCarData(self):
+    def saveReturnData(self):
 
         # Save data to the database
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
@@ -387,7 +391,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
         dbConnection = dbOperations.DbConnection(dbSettings)
-        criteria = f"'{self.ui.keyBarcodeReturnLineEdit.text()}'" # TEkstiä -> Lisää ':t
+        criteria = f"'{self.ui.keyBarcodeReturnLineEdit.text()}'" # Tekstiä -> Lisää ':t
         
         dbConnection.modifyTableData('lainaus', 'palautus','CURRENT_TIMESTAMP', 'rekisterinumero', criteria)        
         
