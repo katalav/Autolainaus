@@ -271,7 +271,7 @@ class DbConnection():
 
 
 
-    # TODO: Tee metodi tietojen muokkaamiseen, yksittäinen sarake
+    # Metodi tietojen muokkaamiseen, yksittäinen sarake
     def modifyTableData(self, table: str, column: str, newValue,criteriaColumn: str, criteriaValue):
         """Updates column according to a filtering criteria
 
@@ -349,7 +349,7 @@ class DbConnection():
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
                 
-    #TODO: Tee metodi tietueen poistamiseen 
+    # Metodi tietueen poistamiseen 
     def deleteRowsFromTable(self, table,criteriaColumn, criteriaValue):
         try:
             # Luodaan yhteys tietokantaan

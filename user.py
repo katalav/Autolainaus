@@ -10,7 +10,7 @@ import json # JSON-tiedostojen käsittely
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 from PySide6.QtCore import QThreadPool, Slot, Qt # Säikeistys, slot-dekoraattori ja Qt
-from PySide6.QtGui import (QCursor) # Ohjelmalliset kursorin muutokset
+from PySide6.QtGui import QPixmap, QCursor # Ohjelmalliset kursorin muutokset
 
 from lendingModules import sound # Äänitoiminnot
 from lendingModules import dbOperations # Tietokantatoiminnot
@@ -210,9 +210,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keyBarcodeLineEdit.setFocus()
         self.ui.lenderNameLabel.show()
         self.ui.savePushButton.hide()
+
    
             
-        # TODO : Luetaan tietokannasta lainaajan nimi
+        # Luetaan tietokannasta lainaajan nimi
         # Tietokanta asetukset
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
@@ -253,7 +254,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
             
-        
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            criteria = f"rekisterinumero = '{self.ui.keyBarcodeLineEdit.text()}'"
+            # Haetaan auton kuva auto-taulusta
+            resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
+            row = resultSet[0]
+            picture = {row[0]} #PNG tai JPG kuva tietokannasta
+            print('kuva on', picture)
+            
+            # BUG: Ei toimi, lataa kuvan binäärimuodossa mutta ei muunna kuvaa
+            pixmap = QPixmap(picture) # Muunnetaan rasteriksi
+            self.ui.carPhotoLabel.setPixmap(pixmap)
+            
+            
+        except Exception as e:
+            title = 'Auton kuvan lataaminen ei onnistunut'
+            text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
 
         #näyttää lainauksen tiedot näytölle
     def setLendingData(self):
@@ -265,14 +285,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.savePushButton.show()
         
         #Näyttää autontiedot
-        # TODO: Luetaan tietokannasta auton perustiedot
-        # TODO: Lisää tähän auton kuvan lataus tietokannasta
         
-                # Tietokanta asetukset
+
+        
+        # Tietokanta asetukset
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
-        # Luetaan lainaajan tiedoista etunimi ja sukunimi
+        
+        # Luetaan auton tiedoista merkki, malli ja henkilömäärä
         try:
             # Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
@@ -280,7 +301,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             resultSet = dbConnection.filterColumsFromTable('vapaana',['merkki', 'malli', 'henkilomaara'], criteria)
             row = resultSet[0]
             carData = f'{row[0]} {row[1]} {row[2]} henkilöä'
-            print('Auton tiedot', carData)
             self.ui.carsInfoStatusLabel.setText(carData)
             
             
@@ -289,14 +309,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             text = 'Auton palautus on tekemättä, ota yhteys henkilökuntaan'
             detailedText = str(e)
             
-            # TODO: Muuta Kursorin muoto
+            # Muuta Kursorin muoto
             self.ui.savePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-            # otetaan painike pois käytöstä, muuttaa kursorin oletuskursoriksi
+            
+            # Otetaan painike pois käytöstä, muuttaa kursorin oletuskursoriksi
             self.ui.savePushButton.setDisabled(True)
             self.openWarning(title, text, detailedText)
             
             # Muutetaan tilarivin teksti
             self.ui.statusbar.showMessage(title)
+
 
     
        # Tallennetaan lainauksen tiedot ja palautetaan käyttöliittymä alkutilaan

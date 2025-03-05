@@ -69,8 +69,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.vehiclePicture = 'uiPictures\\noPicture.png'
         self.vehicleToDelete = ''
 
-        # FIXME: Poista kaikki print-komennot, kun koodi on muuten valmista!
-
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
         
@@ -179,8 +177,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Tehdään lista lainaaja-taulun tiedoista
         tableData = dbConnection.readAllColumnsFromTable('lainaaja')
-        print('Lainaajataulun tiedot:', tableData)
+        
 
+        #Tyhjennetään vanhat tiedot käyttöliittymästä ennen  uusien lukemista tietokannasta
+        self.ui.registeredPersonsTableWidget.clearContents()
+        
         # Määritellään taulukkoelementin otsikot
         headerRow = ['Henkilötunnus', 'Etunimi', 'Sukunimi', 'Ryhmä', 'Ajokortti', 'sähköposti']
         self.ui.registeredPersonsTableWidget.setHorizontalHeaderLabels(headerRow)
@@ -207,7 +208,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Tehdään lista lainaaja-taulun tiedoista
         tableData = dbConnection.readAllColumnsFromTable('auto')
-        print('Auto-taulun tiedot:', tableData)
+        
+        #Tyhjennetään vanhat tiedot käyttöliittymästä ennen  uusien lukemista tietokannasta
+        self.ui.vehicleCatalogTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
         headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Vastuuhenkilö', 'Tyyppi']
@@ -234,7 +237,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Tehdään lista lainaaja-taulun tiedoista
         tableData = dbConnection.readAllColumnsFromTable('ryhma')
-        print('Ryhmä-taulun tiedot:', tableData)
+        
+        #Tyhjennetään vanhat tiedot käyttöliittymästä ennen  uusien lukemista tietokannasta
+        self.ui.savedGroupsTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
         headerRow = ['Ryhmä', 'Vastuuhenkilö']
@@ -276,7 +281,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             dbConnection.addToTable(tableName, groupDictionary)
             self.updateGroupTableWidget()
         except Exception as e:
-            print('Virheilmoitus', str(e))
+
             self.openWarning('Tallennus ei onnistunut', str(e))
 
     # Lainaajien tallennus
@@ -312,7 +317,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e)) 
     
-    # TODO: Ajoneuvojen kuvan lataaminen
+    # Ajoneuvojen kuvan lataaminen
     def openPicture(self):
         userPath = os.path.expanduser('~')
         pathToPictureFolder = userPath + '\\Pictures'
@@ -398,8 +403,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def setRegisterNumber(self):
         rowIndex = 0
         columnIndex = 0
+        cellValue = ''
         
-        self.ui.vehicleCatalogTableWidget.currentIndex()
+        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
+        rowIndex = self.ui.vehicleCatalogTableWidget.currentRow()
+        cellValue = self.ui.vehicleCatalogTableWidget.item(rowIndex, columnIndex).text()
+        self.vehicleToDelete = cellValue
+        self.ui.statusbar.showMessage(f'valitun auton rekisterinumero on {cellValue}')
+        self.ui.removeVehiclePushButton.setEnabled(True)
     
 
     # Virheilmoitukset ja muut Message Box -dialogit
@@ -440,7 +451,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         self.currentSettings = {}
 
         # Tarkistetaan ensin, että asetustiedosto on olemassa
-        # TODO: Yksinkertaista asetusten luku käyttämällä json.load-metodia
+
         try:
             with open('settings.json', 'rt') as settingsFile:
                 jsonData = settingsFile.read()
@@ -493,7 +504,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         }
 
         # Muunnetaan sanakirja JSON-muotoon
-        # TODO: Yksinkertaista muttamalla json.dump-metodia käyttäväksi
+
         jsonData = json.dumps(settingsDictionary)
         
         # Avataan asetustiedosto ja kirjoitetaan asetukset

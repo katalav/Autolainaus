@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>957</width>
+    <width>1107</width>
     <height>634</height>
    </rect>
   </property>
@@ -32,10 +32,10 @@
      </font>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
@@ -54,7 +54,7 @@
        </rect>
       </property>
       <property name="cursor" stdset="0">
-       <cursorShape>ForbiddenCursor</cursorShape>
+       <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="rowCount">
        <number>10</number>
@@ -266,6 +266,32 @@ color: rgb(255, 255, 255);</string>
        </item>
       </layout>
      </widget>
+     <widget class="QPushButton" name="removeLenderPushButton">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>110</y>
+        <width>71</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(57, 136, 220);
+background-color: rgb(255, 1, 5);</string>
+      </property>
+      <property name="text">
+       <string>Poista</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="vehicleTab">
      <property name="cursor">
@@ -377,6 +403,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -385,6 +414,9 @@ color: rgb(255, 255, 255);</string>
           <font>
            <pointsize>11</pointsize>
           </font>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -395,6 +427,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -404,6 +439,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -412,6 +450,9 @@ color: rgb(255, 255, 255);</string>
           <font>
            <pointsize>11</pointsize>
           </font>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -425,7 +466,11 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="vehicleOwnerLineEdit"/>
+        <widget class="QLineEdit" name="vehicleOwnerLineEdit">
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -725,6 +770,9 @@ background-color: rgb(255, 1, 5);</string>
         <bold>true</bold>
        </font>
       </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(57, 136, 220);
 color: rgb(255, 255, 255);</string>
@@ -746,6 +794,9 @@ color: rgb(255, 255, 255);</string>
        <font>
         <pointsize>11</pointsize>
        </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="rowCount">
        <number>10</number>
@@ -844,6 +895,32 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="removeGroupPushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>30</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(57, 136, 220);
+background-color: rgb(255, 1, 5);</string>
+      </property>
+      <property name="text">
+       <string>Poista</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="reportsTab">
@@ -1066,7 +1143,7 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>957</width>
+     <width>1107</width>
      <height>33</height>
     </rect>
    </property>

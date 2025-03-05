@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(957, 634)
+        MainWindow.resize(1107, 634)
         icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setPointSize(10)
         self.tabWidget.setFont(font)
-        self.tabWidget.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.tabWidget.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.lenderTab = QWidget()
         self.lenderTab.setObjectName(u"lenderTab")
         self.lenderTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
             self.registeredPersonsTableWidget.setRowCount(10)
         self.registeredPersonsTableWidget.setObjectName(u"registeredPersonsTableWidget")
         self.registeredPersonsTableWidget.setGeometry(QRect(20, 240, 641, 241))
-        self.registeredPersonsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
+        self.registeredPersonsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ArrowCursor))
         self.registeredPersonsTableWidget.setRowCount(10)
         self.registeredPersonsTableWidget.setColumnCount(6)
         self.registeredPersonsLabel = QLabel(self.lenderTab)
@@ -153,6 +153,13 @@ class Ui_MainWindow(object):
 
         self.studentLabelsVerticalLayout.addWidget(self.emailLabel)
 
+        self.removeLenderPushButton = QPushButton(self.lenderTab)
+        self.removeLenderPushButton.setObjectName(u"removeLenderPushButton")
+        self.removeLenderPushButton.setGeometry(QRect(310, 110, 71, 23))
+        self.removeLenderPushButton.setFont(font1)
+        self.removeLenderPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.removeLenderPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+"background-color: rgb(255, 1, 5);")
         self.tabWidget.addTab(self.lenderTab, "")
         self.vehicleTab = QWidget()
         self.vehicleTab.setObjectName(u"vehicleTab")
@@ -212,30 +219,35 @@ class Ui_MainWindow(object):
         self.numberPlateLineEdit = QLineEdit(self.layoutWidget_2)
         self.numberPlateLineEdit.setObjectName(u"numberPlateLineEdit")
         self.numberPlateLineEdit.setFont(font2)
+        self.numberPlateLineEdit.setClearButtonEnabled(True)
 
         self.vehicleInputsVerticalLayout.addWidget(self.numberPlateLineEdit)
 
         self.manufacturerLineEdit = QLineEdit(self.layoutWidget_2)
         self.manufacturerLineEdit.setObjectName(u"manufacturerLineEdit")
         self.manufacturerLineEdit.setFont(font2)
+        self.manufacturerLineEdit.setClearButtonEnabled(True)
 
         self.vehicleInputsVerticalLayout.addWidget(self.manufacturerLineEdit)
 
         self.modelLineEdit = QLineEdit(self.layoutWidget_2)
         self.modelLineEdit.setObjectName(u"modelLineEdit")
         self.modelLineEdit.setFont(font2)
+        self.modelLineEdit.setClearButtonEnabled(True)
 
         self.vehicleInputsVerticalLayout.addWidget(self.modelLineEdit)
 
         self.modelYearLineEdit = QLineEdit(self.layoutWidget_2)
         self.modelYearLineEdit.setObjectName(u"modelYearLineEdit")
         self.modelYearLineEdit.setFont(font2)
+        self.modelYearLineEdit.setClearButtonEnabled(True)
 
         self.vehicleInputsVerticalLayout.addWidget(self.modelYearLineEdit)
 
         self.capacityLineEdit = QLineEdit(self.layoutWidget_2)
         self.capacityLineEdit.setObjectName(u"capacityLineEdit")
         self.capacityLineEdit.setFont(font2)
+        self.capacityLineEdit.setClearButtonEnabled(True)
 
         self.vehicleInputsVerticalLayout.addWidget(self.capacityLineEdit)
 
@@ -247,6 +259,7 @@ class Ui_MainWindow(object):
 
         self.vehicleOwnerLineEdit = QLineEdit(self.layoutWidget_2)
         self.vehicleOwnerLineEdit.setObjectName(u"vehicleOwnerLineEdit")
+        self.vehicleOwnerLineEdit.setClearButtonEnabled(True)
 
         self.vehicleInputsVerticalLayout.addWidget(self.vehicleOwnerLineEdit)
 
@@ -308,6 +321,7 @@ class Ui_MainWindow(object):
         self.saveGroupPushButton.setObjectName(u"saveGroupPushButton")
         self.saveGroupPushButton.setGeometry(QRect(300, 60, 81, 23))
         self.saveGroupPushButton.setFont(font1)
+        self.saveGroupPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveGroupPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.savedGroupsTableWidget = QTableWidget(self.groupsTab)
@@ -318,6 +332,7 @@ class Ui_MainWindow(object):
         self.savedGroupsTableWidget.setObjectName(u"savedGroupsTableWidget")
         self.savedGroupsTableWidget.setGeometry(QRect(30, 120, 351, 192))
         self.savedGroupsTableWidget.setFont(font2)
+        self.savedGroupsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ArrowCursor))
         self.savedGroupsTableWidget.setRowCount(10)
         self.savedGroupsTableWidget.setColumnCount(2)
         self.savedGroupsLabel = QLabel(self.groupsTab)
@@ -359,6 +374,13 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.responsiblePLabel_2)
 
+        self.removeGroupPushButton_2 = QPushButton(self.groupsTab)
+        self.removeGroupPushButton_2.setObjectName(u"removeGroupPushButton_2")
+        self.removeGroupPushButton_2.setGeometry(QRect(300, 30, 81, 21))
+        self.removeGroupPushButton_2.setFont(font1)
+        self.removeGroupPushButton_2.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.removeGroupPushButton_2.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+"background-color: rgb(255, 1, 5);")
         self.tabWidget.addTab(self.groupsTab, "")
         self.reportsTab = QWidget()
         self.reportsTab.setObjectName(u"reportsTab")
@@ -415,7 +437,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 957, 33))
+        self.menubar.setGeometry(QRect(0, 0, 1107, 33))
         self.menuAsetukset = QMenu(self.menubar)
         self.menuAsetukset.setObjectName(u"menuAsetukset")
         MainWindow.setMenuBar(self.menubar)
@@ -429,7 +451,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -448,6 +470,7 @@ class Ui_MainWindow(object):
         self.groupLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4", None))
         self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajokorttiluokka", None))
         self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
+        self.removeLenderPushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.lenderTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
         self.numberPlateLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.manufacturerLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki", None))
@@ -467,6 +490,7 @@ class Ui_MainWindow(object):
         self.savedGroupsLabel.setText(QCoreApplication.translate("MainWindow", u"Tallennetut ryhm\u00e4t", None))
         self.groupNameLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4n nimi", None))
         self.responsiblePLabel_2.setText(QCoreApplication.translate("MainWindow", u"Vastuuhenkil\u00f6", None))
+        self.removeGroupPushButton_2.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.groupsTab), QCoreApplication.translate("MainWindow", u"Ryhm\u00e4t", None))
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))

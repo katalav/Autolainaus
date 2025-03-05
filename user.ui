@@ -38,7 +38,7 @@ background-color: rgb(51, 167, 181);</string>
      <rect>
       <x>50</x>
       <y>180</y>
-      <width>681</width>
+      <width>881</width>
       <height>481</height>
      </rect>
     </property>
@@ -296,6 +296,25 @@ color: rgb(0, 33, 72);</string>
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QLabel" name="carPhotoLabel">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>190</y>
+       <width>251</width>
+       <height>191</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>uiPictures/XUX682.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="teacherLabel">
     <property name="geometry">
@@ -418,14 +437,14 @@ background-color: rgb(0, 33, 72);
    <widget class="QFrame" name="startFrame">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>170</y>
       <width>781</width>
-      <height>631</height>
+      <height>531</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 33, 72);</string>
+     <string notr="true">background-color: rgb(0, 98, 117);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -494,25 +513,6 @@ background-color: rgb(0, 33, 72);
       <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="carPhotoLabel">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>430</y>
-       <width>251</width>
-       <height>191</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>uiPictures/XUX682.png</pixmap>
-     </property>
-     <property name="scaledContents">
       <bool>true</bool>
      </property>
     </widget>
