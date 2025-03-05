@@ -254,6 +254,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
             
+
+
+        #näyttää lainauksen tiedot näytölle
+    def setLendingData(self):
+        self.ui.carsInfoStatusLabel.show()
+        self.ui.dateLabel.show()
+        self.ui.calendarLabel.show()
+        self.ui.clockLabel.show()
+        self.ui.timeLabel.show()
+        self.ui.savePushButton.show()
+        
+        #Näyttää autontiedot
         try:
             # Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
@@ -261,7 +273,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Haetaan auton kuva auto-taulusta
             resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
             row = resultSet[0]
-            picture = {row[0]} #PNG tai JPG kuva tietokannasta
+            picture = row[0] #PNG tai JPG kuva tietokannasta
             print('kuva on', picture)
             
             # BUG: Ei toimi, lataa kuvan binäärimuodossa mutta ei muunna kuvaa
@@ -274,18 +286,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
-
-        #näyttää lainauksen tiedot näytölle
-    def setLendingData(self):
-        self.ui.carsInfoStatusLabel.show()
-        self.ui.dateLabel.show()
-        self.ui.calendarLabel.show()
-        self.ui.clockLabel.show()
-        self.ui.timeLabel.show()
-        self.ui.savePushButton.show()
-        
-        #Näyttää autontiedot
-        
 
         
         # Tietokanta asetukset
