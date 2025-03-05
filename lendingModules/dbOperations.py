@@ -350,35 +350,31 @@ class DbConnection():
                 currentConnection.close() # Tuhotaan yhteys
                 
     #TODO: Tee metodi tietueen poistamiseen 
-    def deleteRowFromTable(self, table,criteriaColumn, criteriaValue):
-        pass
+    def deleteRowsFromTable(self, table,criteriaColumn, criteriaValue):
+        try:
+            # Luodaan yhteys tietokantaan
+            currentConnection = psycopg2.connect(self.connectionString)
+            # Luodaan kursori suorittamaan tietokantoperaatiota
+            cursor = currentConnection.cursor()
 
-if __name__ == "__main__":
+            # Määritellään lopullinen SQL-lause, paikkamerkki %s korvautuu binääritiedolla
+            sqlClause = f'DELETE FROM {table} WHERE {criteriaColumn} = {criteriaValue}'
+            print(sqlClause)
+            # Suoritetaan SQL-lause
+            cursor.execute(sqlClause)
 
-    testDictionary = {'server': 'localhost',
-                      'port': '5432',
-                      'database': 'autolainaus',
-                      'userName': 'autolainaus',
-                      'password': 'Q2werty'}    
-    
-    tableDictionary = {'etunimi': 'Uolevi',
-                       'sukunimi': 'Untamo'}
-    
-    
-    dbConnection = DbConnection(testDictionary)
+            # Vahvistetaan tapahtuma (transaction)
+            currentConnection.commit()
 
-    print('Yhteysmerkkijono on:', dbConnection.connectionString)
+        # Jos tapahtuu virhe, välitetään se luokkaa käyttävälle ohjelmalle
+        except (Exception, psycopg2.Error) as e:
+            raise e 
+        finally:
 
-    # dbConnection.addToTable('testitaulu', tableDictionary)
-    recordSet = dbConnection.readAllColumnsFromTable('ryhma')
-    print('Ryhmän tiedot ovat:', recordSet)
-
-    recordSet2 = dbConnection.readColumsFromTable('ryhma', ['ryhma', 'vastuuhenkilo'])
-    print('Ryhmät ja vastuuhenkilöt ovat:', recordSet2)
-
-    recordSet3 = dbConnection.readColumsFromTable('ryhma',['vastuuhenkilo'])
-    print('Vastuuhenkilöitä ovat:', recordSet3)
-
+            # Selvitetään muodostuiko yhteysolio
+            if currentConnection:
+                cursor.close() # Tuhotaan kursori
+                currentConnection.close() # Tuhotaan yhteys
     
 if __name__ == '__main':    
 
@@ -389,5 +385,4 @@ if __name__ == '__main':
                       'password': 'Q2werty' }
 
     dbConnection = DbConnection(settingsDictionary)
-
     print(dbConnection.connectionString)

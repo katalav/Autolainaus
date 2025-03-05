@@ -266,6 +266,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         #Näyttää autontiedot
         # TODO: Luetaan tietokannasta auton perustiedot
+        # TODO: Lisää tähän auton kuvan lataus tietokannasta
+        
                 # Tietokanta asetukset
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword

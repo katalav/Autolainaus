@@ -12,7 +12,7 @@ import json # JSON-objektien ja tiedostojen käsittely
 # Asennuksen vaativat kirjastot
 
 from PySide6 import QtWidgets # Qt-vimpaimet
-from PySide6 import QtGui
+from PySide6 import QtGui # Pixmap- muunnoksia varten
 
 
 # Käyttöliittymämoduulien lataukset
@@ -25,7 +25,7 @@ from aboutDialog_ui import Ui_Dialog as About_Dialog
 from lendingModules import dbOperations # PostgreSQL-tietokantayhteydet
 from lendingModules import cipher # Salakirjoitusmoduuli
 from lendingModules import barcode # viivakoodin muodostin
-from lendingModules import identitycheck2 # henkilötunnuksen tarkistus
+
 
 # LUOKKAMÄÄRITYKSET
 # -----------------
@@ -64,8 +64,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             
         except Exception as e:
             self.openSettingsDialog()
-            
+        
+        # Asetetaan auton oletuskuvaksi harmaa kamera
         self.vehiclePicture = 'uiPictures\\noPicture.png'
+        self.vehicleToDelete = ''
 
         # FIXME: Poista kaikki print-komennot, kun koodi on muuten valmista!
 
@@ -85,8 +87,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.saveGroupPushButton.clicked.connect(self.saveGroup)
         self.ui.savePersonPushButton.clicked.connect(self.savePerson)
         self.ui.saveVehiclePushButton.clicked.connect(self.saveVehicle)
-        # TODO: Painike openPicturesPushButton klikkaus kutsuu openPicture-dialogi
         self.ui.openPicturesPushButton.clicked.connect(self.openPicture)
+        self.ui.removeVehiclePushButton.clicked.connect(self.deleteVehicle)
+        
+        # Taulukoiden soluvalinnat
+        self.ui.vehicleCatalogTableWidget.cellClicked.connect(self.setRegisterNumber)
         
    
    
@@ -113,10 +118,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Yleinen käyttöliittymän verestys (refresh)
     def refreshUi(self):
+        # Auton kuvaksi kameran kuva
+        self.vehiclePicture = 'uiPictures\\noPicture.png' # Kuvan poluksi ei kuvaa symboli
+        self.ui.carPhotoLabel.setPixmap(QtGui.QPixmap(self.vehiclePicture)) # auton kuvan päivitys
         self.updateCombos() # Ryhmän valinta -yhdistelmäruudun arvot
         self.updateLenderTableWidget() # Lainaajien tiedot
         self.updateVehicleTableWidget() # Autojen tiedot
         self.updateGroupTableWidget() # Ryhmien tiedot
+        self.ui.removeVehiclePushButton.setEnabled(False) # Otetaan auton-poisto painike pois käytöstä
+        
     # Välilehtien slotit
     # ------------------
     # Ryhmän valinta ja ajoneuvotyyppi ruutujen arvojen päivitys
@@ -322,7 +332,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword
-        
         numberPlate = self.ui.numberPlateLineEdit.text()
         manufacturer = self.ui.manufacturerLineEdit.text()
         model = self.ui.modelLineEdit.text()
@@ -349,10 +358,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan tallennusmetodia
         try:
             dbConnection.addToTable(tableName, vehicleDictionary)
-            self.updateVehicleTableWidget()
+            
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e))
-            
             
         # Luodaan kuvatiedosto ja päivitetään auto- taulua
         with open(self.vehiclePicture, 'rb') as pictureFile:
@@ -363,9 +371,36 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         try:     
             dbConnection2.updateBinaryField('auto','kuva', 'rekisterinumero', f"'{numberPlate}'", pictureData)
             self.refreshUi()
+            
 
         except Exception as e: 
             self.openWarning('Kuvan päivitys ei onnistunut', str(e))
+            
+    def deleteVehicle(self):
+
+         # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+         # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.deleteRowsFromTable('auto', 'rekisterinumero', f"'{self.vehicleToDelete}'")
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Poisto ei onnistunut', str(e)) 
+            
+    # Taulukoiden soluvalinnat
+    #-------------------------
+    
+    def setRegisterNumber(self):
+        rowIndex = 0
+        columnIndex = 0
+        
+        self.ui.vehicleCatalogTableWidget.currentIndex()
+    
 
     # Virheilmoitukset ja muut Message Box -dialogit
     # ----------------------------------------------
