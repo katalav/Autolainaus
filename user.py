@@ -174,7 +174,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
         
-        # TODO: Lisää rutiini joka hakee ajossa olevat autot 
+        # Rutiini joka hakee ajossa olevat autot 
         try:
             # Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
