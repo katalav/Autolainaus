@@ -492,6 +492,7 @@ class Ui_MainWindow(object):
         self.responsiblePLabel_2.setText(QCoreApplication.translate("MainWindow", u"Vastuuhenkil\u00f6", None))
         self.deleteGroupPushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.groupsTab), QCoreApplication.translate("MainWindow", u"Ryhm\u00e4t", None))
+        self.reportTypecomboBox.setCurrentText("")
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
         self.beginingLabel.setText(QCoreApplication.translate("MainWindow", u"Alkaa", None))
         self.endingLabel.setText(QCoreApplication.translate("MainWindow", u"P\u00e4\u00e4ttyy", None))
