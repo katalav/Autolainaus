@@ -944,6 +944,9 @@ background-color: rgb(255, 1, 5);</string>
         <pointsize>11</pointsize>
        </font>
       </property>
+      <property name="currentText">
+       <string/>
+      </property>
      </widget>
      <widget class="QLabel" name="reportTypeLabel">
       <property name="geometry">
